@@ -15,6 +15,7 @@ Visual Studio Code
 뷰 확장 플러그인 : Vetur
 뷰 코드 스니펫 : Vue VSCode Snippets
 문법 검사 : ESLint
+HTML 태그 자동 닫기 : Auto Close Tag
 ```
 
 ## 각종 설정
