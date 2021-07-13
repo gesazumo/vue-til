@@ -1,9 +1,16 @@
 <template>
-	<div>FormPage</div>
+	<div>
+		<div>FormPage</div>
+		<FormComponent />
+	</div>
 </template>
 
 <script>
-export default {}
+import FormComponent from '@/components/FormComponent.vue'
+
+export default {
+	components: { FormComponent },
+}
 </script>
 
 <style></style>

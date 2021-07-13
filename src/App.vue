@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<v-app>
 		<sidebar-menu :menu="menu" />
 		<router-view class="page" />
-	</div>
+	</v-app>
 </template>
 
 <script>
