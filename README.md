@@ -1,29 +1,32 @@
-# vue-til
+# Vue.js 공통만들깅
 
-## Project setup
+### 개발환경
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+Vue.js
+Javascript es6
+Git
+Chrome
+Visual Studio Code
 ```
 
-### Run your unit tests
+## VSCode extension 목록
 ```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
+파일 아이콘 테마 : Material Icon Theme
+뷰 확장 플러그인 : Vetur
+뷰 코드 스니펫 : Vue VSCode Snippets
+문법 검사 : ESLint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 각종 설정
+```
+개발서버 디버깅시 에러가 화면을 덮는기능 
+vue.config.js -> devServer.overlay t/f 설정
+
+eslint 설정
+.eslintrc.js -> prettier/prettier 
+```
+
+## 실행방법
+```
+Git Clone -> npm install -> npm run serve
+```
