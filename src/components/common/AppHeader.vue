@@ -1,10 +1,13 @@
 <template>
-	<div>AppHeader</div>
+	<header>
+		<router-link to="/home">Home</router-link>
+		<router-link to="/form">FormPage</router-link>
+		<router-link to="/vuex">VuexPage</router-link>
+		<router-link to="/api">ApiCallPage</router-link>
+	</header>
 </template>
 
 <script>
-import Demo from '@/components/demo/basic/Demo.vue'
-
 export default {}
 </script>
 
