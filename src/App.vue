@@ -1,55 +1,26 @@
 <template>
 	<v-app>
-		<sidebar-menu :menu="menu" />
-		<router-view class="page" />
+		<div class="browser">
+			<search-bar />
+		</div>
 	</v-app>
 </template>
 
 <script>
-import { SidebarMenu } from 'vue-sidebar-menu'
-
+import SearchBar from '@/components/SearchBar.vue'
 export default {
 	name: 'App',
-	components: {
-		SidebarMenu,
-	},
+	components: { SearchBar },
 	data() {
-		return {
-			menu: [
-				{
-					header: true,
-					title: 'Main Navigation',
-					hiddenOnCollapse: true,
-				},
-				{
-					href: '/home',
-					title: 'Home',
-					icon: 'fa fa-user',
-				},
-				{
-					href: '/form',
-					title: 'FormPage',
-					icon: 'fa fa-chart-area',
-				},
-				{
-					href: '/vuex',
-					title: 'VuexPage',
-					icon: 'fa fa-user',
-				},
-				{
-					href: '/api',
-					title: 'ApiCallPage',
-					icon: 'fa fa-user',
-				},
-			],
-		}
+		return {}
 	},
 }
 </script>
 
 <style>
-.page {
-	margin-left: 50px;
-	padding: 10px;
+.browser {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 20px;
 }
 </style>
