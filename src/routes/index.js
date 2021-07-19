@@ -15,8 +15,8 @@ export default new VueRouter({
 			component: () => import('@/views/Home.vue'),
 		},
 		{
-			path: '/form',
-			component: () => import('@/views/FormPage.vue'),
+			path: '/find',
+			component: () => import('@/views/Find.vue'),
 		},
 		{
 			path: '/vuex',

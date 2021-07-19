@@ -2,24 +2,18 @@
 	<v-app>
 		<div class="browser">
 			<search-bar />
-			<rotation :title="' - 금주의 로테이션 챔피언'" />
-			<div :style="{ height: '10px' }" />
-			<space-row :height="20" />
-			<sale-skin :title="' - 현재 진행중인 챔피언 및 스킨 세일'" />
+			<router-view></router-view>
 		</div>
 	</v-app>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar.vue'
-import Rotation from './components/Rotation.vue'
-import SaleSkin from './views/SaleSkin.vue'
-import SpaceRow from './components/common/SpaceRow.vue'
 import { mapActions } from 'vuex'
 
 export default {
 	name: 'App',
-	components: { SearchBar, Rotation, SaleSkin, SpaceRow },
+	components: { SearchBar },
 	data() {
 		return {}
 	},

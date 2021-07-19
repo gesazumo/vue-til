@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { fetchSearchUser } from '@/api/search'
+import { fetchFindUser } from '@/api/find'
 export default {
 	data() {
 		return {
@@ -35,7 +35,7 @@ export default {
 	methods: {
 		async doSearch() {
 			const summonerName = this.summonerName
-			const { data } = await fetchSearchUser(summonerName)
+			const { data } = await fetchFindUser(summonerName)
 			console.log(data)
 		},
 	},
