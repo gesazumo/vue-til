@@ -1,10 +1,17 @@
 <template>
-	<v-container class="box grey">
+	<v-container class="box">
 		<div class="titles">{{ title }}</div>
 		<v-row>
 			<v-col v-for="i in saleChamp" :key="i" :cols="3" class="col">
-				<img class="portrait" src="@/assets/logo.png" />
-				제라스
+				<div>
+					<img class="portrait" src="@/assets/logo.png" />
+					<div class="payment">
+						<sapn class="org-payment">ddd</sapn>
+						㉾
+						<sapn class="sale-payment">123</sapn>
+					</div>
+					<div class="skin-name">전산</div>
+				</div>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -26,4 +33,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.payment .org-payment {
+	color: gray;
+}
+.payment .sale-payment {
+}
+.skin-name {
+	text-align: center;
+}
+</style>

@@ -15,11 +15,19 @@ import SearchBar from '@/components/SearchBar.vue'
 import Rotation from './components/Rotation.vue'
 import SaleSkin from './views/SaleSkin.vue'
 import SpaceRow from './components/common/SpaceRow.vue'
+import { mapActions } from 'vuex'
+
 export default {
 	name: 'App',
 	components: { SearchBar, Rotation, SaleSkin, SpaceRow },
 	data() {
 		return {}
+	},
+	methods: {
+		...mapActions(['getChampionList']),
+	},
+	created() {
+		this.getChampionList()
 	},
 }
 </script>
@@ -36,11 +44,13 @@ export default {
 	padding-top: 0;
 	padding-right: 0;
 	padding-left: 0;
+	background-color: rgb(241, 241, 241);
 }
 .titles {
 	background-color: dodgerblue;
 	padding: 3px;
 	color: floralwhite;
 	font-size: 8px !important;
+	margin-bottom: 12px;
 }
 </style>

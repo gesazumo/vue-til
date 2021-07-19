@@ -1,16 +1,19 @@
 <template>
-	<v-container class="box grey">
+	<v-container class="box">
 		<div class="titles">{{ title }}</div>
-		<v-row>
-			<v-col v-for="i in rotationChamp" :key="i" :cols="1" class="col">
-				<img class="portrait" src="@/assets/logo.png" />
+		<v-row v-if="freeChampionIds.length > 0">
+			<v-col v-for="i in freeChampionIds" :key="i" :cols="1" class="col">
+				<rotation-champ :champ-key="i" />
 			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
+import { fetchRotationChampions } from '../api/init'
+import RotationChamp from './RotationChamp.vue'
 export default {
+	components: { RotationChamp },
 	props: {
 		title: {
 			type: String,
@@ -19,7 +22,16 @@ export default {
 	},
 	data() {
 		return {
-			rotationChamp: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+			freeChampionIds: [],
+			freeChampionIdsForNewPlayers: [],
+		}
+	},
+	async created() {
+		try {
+			const { data } = await fetchRotationChampions()
+			this.freeChampionIds = data.freeChampionIds
+		} catch (error) {
+			console.log(error)
 		}
 	},
 }
@@ -32,8 +44,12 @@ export default {
 	flex-direction: row;
 	justify-content: center;
 }
-.portrait {
-	height: 70px;
-	width: 70px;
+
+.rotation-champion-box {
+	padding: 20;
+}
+.rotation-champion-box .champion-name {
+	font-size: x-small;
+	text-align: center;
 }
 </style>
