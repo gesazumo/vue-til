@@ -20,7 +20,6 @@ export default new Vuex.Store({
 		championInfo: state => key => {
 			for (const [value] of Object.entries(state.championList)) {
 				if (key == state.championList[value].key) {
-					console.log(state.championList[value])
 					return state.championList[value]
 				}
 			}
