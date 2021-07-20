@@ -1,7 +1,7 @@
 import { instance, directInstance } from './index'
 
 const url = {
-	rotation: 'rotation',
+	rotation: 'init/rotation',
 	allChampions: 'ko_KR/champion.json',
 }
 

@@ -1,9 +1,12 @@
 <template>
-	<div>ddd</div>
+	<summoner-info></summoner-info>
 </template>
 
 <script>
-export default {}
+import SummonerInfo from '../components/SummonerInfo.vue'
+export default {
+	components: { SummonerInfo },
+}
 </script>
 
 <style></style>

@@ -15,7 +15,7 @@ export default new VueRouter({
 			component: () => import('@/views/Home.vue'),
 		},
 		{
-			path: '/find',
+			path: '/find/:username',
 			component: () => import('@/views/Find.vue'),
 		},
 		{

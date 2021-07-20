@@ -5,7 +5,12 @@ import { SET_CHAMPION_LIST, SET_LOADING } from './mutation-type'
 
 Vue.use(Vuex)
 
+import findStore from '@/store/modules/findStore.js'
+
 export default new Vuex.Store({
+	modules: {
+		findStore: findStore,
+	},
 	state: {
 		summonerName: null,
 		championList: [],

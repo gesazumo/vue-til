@@ -26,17 +26,28 @@
 
 <script>
 import { fetchFindUser } from '@/api/find'
+import { mapActions, mapGetters } from 'vuex'
 export default {
 	data() {
 		return {
 			summonerName: null,
 		}
 	},
+	computed: {
+		...mapGetters('findStore', ['getSummonerName']),
+	},
 	methods: {
+		...mapActions('findStore', ['setSummoner']),
 		async doSearch() {
 			const summonerName = this.summonerName
-			const { data } = await fetchFindUser(summonerName)
-			console.log(data)
+			try {
+				const { data } = await fetchFindUser(summonerName)
+				await this.setSummoner(data)
+				this.$router.push({ path: `/find/${this.getSummonerName}` })
+			} catch (error) {
+				// 404등등 에러처리
+				console.log(error)
+			}
 		},
 	},
 }
