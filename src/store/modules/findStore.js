@@ -30,6 +30,9 @@ const findStore = {
 		getSummonerId: state => {
 			return state.summoner.id
 		},
+		getSummonerAccountId: state => {
+			return state.summoner.accountId
+		},
 	},
 }
 

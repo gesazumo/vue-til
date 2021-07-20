@@ -1,7 +1,10 @@
 <template>
 	<div>
+		<div v-if="!userNotFound">
+			<summoner-info></summoner-info>
+			<recent-game></recent-game>
+		</div>
 		<not-found-page v-if="userNotFound"></not-found-page>
-		<summoner-info v-if="!userNotFound"></summoner-info>
 	</div>
 </template>
 
@@ -10,6 +13,7 @@ import SummonerInfo from '@/components/SummonerInfo.vue'
 import { fetchFindUser } from '@/api/find'
 import { mapActions } from 'vuex'
 import NotFoundPage from '@/views/NotFoundPage.vue'
+import RecentGame from '../components/RecentGame.vue'
 
 export default {
 	data() {
@@ -17,7 +21,7 @@ export default {
 			userNotFound: false,
 		}
 	},
-	components: { SummonerInfo, NotFoundPage },
+	components: { SummonerInfo, NotFoundPage, RecentGame },
 	methods: {
 		...mapActions('findStore', ['setSummoner']),
 		async findUser(summonerName, next = null) {
