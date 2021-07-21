@@ -10,7 +10,7 @@ export const fetchFindUser = summonerName => {
 	return instance.get(`${url.find}${summonerName}`)
 }
 
-export const fetchFindUserInfo = id => {
+export const fetchFindUserRankInfo = id => {
 	return instance.get(`${url.info}${id}`)
 }
 

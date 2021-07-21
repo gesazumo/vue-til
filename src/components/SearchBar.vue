@@ -36,14 +36,6 @@ export default {
 		async doSearch() {
 			const summonerName = this.summonerName
 			this.$router.push({ path: `/find/${summonerName}` })
-			// try {
-			// const { data } = await fetchFindUser(summonerName)
-			// await this.setSummoner(data)
-
-			// } catch (error) {
-			// 	// 404등등 에러처리
-			// 	console.log(error)
-			// }
 		},
 	},
 }

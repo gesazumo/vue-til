@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-card class="mx-auto" outlined>
+		<v-card class="mx-auto" outlined v-if="summoner">
 			<v-list-item three-line>
 				<v-list-item-avatar tile size="150">
 					<div>
@@ -23,22 +23,21 @@
 				</v-list-item-content>
 			</v-list-item>
 		</v-card>
-
-		<div>티어:{{ summonerInfo.tier }}</div>
-		<div>랭크:{{ summonerInfo.rank }}</div>
-		<div>리그포인트:{{ summonerInfo.leaguePoints }}</div>
-		<div>승:{{ summonerInfo.wins }}</div>
-		<div>패:{{ summonerInfo.losses }}</div>
+		<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
+		<rank-info :rank-info="flexRankInfo" title="자유랭크" />
 	</div>
 </template>
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import { fetchFindUserInfo } from '../api/find'
+import { fetchFindUserRankInfo } from '../api/find'
+import RankInfo from './RankInfo.vue'
 export default {
+	components: { RankInfo },
 	data() {
 		return {
-			summonerInfo: {},
+			soloRankInfo: {},
+			flexRankInfo: {},
 		}
 	},
 	computed: {
@@ -47,16 +46,17 @@ export default {
 	},
 	watch: {
 		getSummonerId() {
-			this.summonerInfo = {}
-			this.getSummonerInfo()
+			this.soloRankInfo = {}
+			this.flexRankInfo = {}
+			this.getRankInfo()
 		},
 	},
 	methods: {
-		async getSummonerInfo() {
+		async getRankInfo() {
 			const summonerId = this.getSummonerId
-			const { data } = await fetchFindUserInfo(summonerId)
-			// faker로 검색하면 data.lenght가 0임
-			this.summonerInfo = data[0]
+			const { data } = await fetchFindUserRankInfo(summonerId)
+			this.soloRankInfo = data.solo
+			this.flexRankInfo = data.flex
 		},
 	},
 }
