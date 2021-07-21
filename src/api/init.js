@@ -1,4 +1,4 @@
-import { instance, directInstance } from './index'
+import { instance, ddragonInstance } from './index'
 
 const url = {
 	rotation: 'init/rotation',
@@ -6,7 +6,7 @@ const url = {
 }
 
 export const fetchAllChampions = () => {
-	return directInstance.get(`${url.allChampions}`)
+	return ddragonInstance.get(`${url.allChampions}`)
 }
 
 export const fetchRotationChampions = () => {

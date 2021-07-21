@@ -1,12 +1,18 @@
 import axios from 'axios'
 
 const RIOT_API_URL = 'http://localhost:3000/'
-const LEAGUE_OF_LEGENDS_API_URL =
-	'https://ddragon.leagueoflegends.com/cdn/11.14.1/data/'
+const DDRAGON_API_URL = 'https://ddragon.leagueoflegends.com/cdn/11.14.1/data/'
+const STATIC_API_URL = 'https://static.developer.riotgames.com/docs/lol/'
 
-function createDirectInstance() {
+function createDdragonInstance() {
 	return axios.create({
-		baseURL: LEAGUE_OF_LEGENDS_API_URL,
+		baseURL: DDRAGON_API_URL,
+	})
+}
+
+function createStaticInstance() {
+	return axios.create({
+		baseURL: STATIC_API_URL,
 	})
 }
 
@@ -16,6 +22,6 @@ function createInstance() {
 	})
 }
 
-export const directInstance = createDirectInstance()
-
+export const ddragonInstance = createDdragonInstance()
+export const staticInstance = createStaticInstance()
 export const instance = createInstance()

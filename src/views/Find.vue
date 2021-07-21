@@ -23,7 +23,7 @@ export default {
 	},
 	components: { SummonerInfo, NotFoundPage, RecentGame },
 	methods: {
-		...mapActions('findStore', ['setSummoner']),
+		...mapActions('findStore', ['setSummoner', 'setQueues']),
 		async findUser(summonerName, next = null) {
 			try {
 				const { data } = await fetchFindUser(summonerName)
@@ -38,6 +38,7 @@ export default {
 	},
 	created() {
 		const summonerName = this.$route.params.username
+		this.setQueues()
 		this.findUser(summonerName)
 	},
 	beforeRouteUpdate(to, from, next) {
