@@ -10,7 +10,6 @@
 
 <script>
 import SummonerInfo from '@/components/SummonerInfo.vue'
-import { fetchFindUser } from '@/api/find'
 import { mapActions } from 'vuex'
 import NotFoundPage from '@/views/NotFoundPage.vue'
 import RecentGame from '../components/RecentGame.vue'
@@ -26,11 +25,9 @@ export default {
 		...mapActions('findStore', ['setSummoner', 'setQueues']),
 		async findUser(summonerName, next = null) {
 			try {
-				const { data } = await fetchFindUser(summonerName)
-				await this.setSummoner(data)
+				await this.setSummoner(summonerName)
 				this.userNotFound = false
 			} catch (error) {
-				console.log(error)
 				this.userNotFound = true
 			}
 			if (next) next()

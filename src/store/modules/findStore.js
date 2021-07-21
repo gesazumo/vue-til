@@ -1,4 +1,4 @@
-import { fetchQueues } from '@/api/find'
+import { fetchFindUser, fetchQueues } from '@/api/find'
 import { SET_SUMMONER, SET_QUEUES } from '../mutation-type'
 
 const findStore = {
@@ -23,8 +23,14 @@ const findStore = {
 		},
 	},
 	actions: {
-		setSummoner({ commit }, summoner) {
-			commit(SET_SUMMONER, { summoner })
+		async setSummoner({ commit }, summonerName) {
+			try {
+				const { data } = await fetchFindUser(summonerName)
+				commit(SET_SUMMONER, { summoner: data })
+			} catch (error) {
+				console.log(error.response)
+				throw new Error(error)
+			}
 		},
 		async setQueues({ commit }) {
 			try {
