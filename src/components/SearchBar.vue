@@ -31,7 +31,11 @@ export default {
 			summonerName: null,
 		}
 	},
-
+	watch: {
+		$route(to) {
+			if (to.params.username) this.summonerName = to.params.username
+		},
+	},
 	methods: {
 		async doSearch() {
 			const summonerName = this.summonerName

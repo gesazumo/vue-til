@@ -1,11 +1,19 @@
 <template>
-	<div>recent game</div>
+	<div>
+		recent game
+		<div :style="{ float: 'left', width: '40%' }">1</div>
+		<div :style="{ float: 'left', width: '40%' }">1</div>
+
+		<game />
+	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { fetchFindRecentGame } from '../api/find'
+import Game from './Game.vue'
 export default {
+	components: { Game },
 	data() {
 		return {
 			beginIndex: 0,
