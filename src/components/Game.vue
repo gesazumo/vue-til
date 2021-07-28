@@ -64,6 +64,27 @@
 			<div class="font-weight-light" :style="grayFont">매치 평균</div>
 			<div>Silver 4</div>
 		</div>
+		<div class="items">
+			<div class="table">
+				<div class="tableRow">
+					<div class="tableCell">
+						<img
+							class="portrait"
+							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+						/>
+					</div>
+					<div class="tableCell">1</div>
+					<div class="tableCell">1</div>
+					<div class="tableCell">1</div>
+				</div>
+				<div class="tableRow">
+					<div class="tableCell">1</div>
+					<div class="tableCell">1</div>
+					<div class="tableCell">1</div>
+					<div class="tableCell">1</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -79,7 +100,7 @@ export default {
 
 <style>
 .win {
-	background-color: lightgrey;
+	background-color: #e2b6b3;
 }
 .game {
 	display: flex;
@@ -95,6 +116,10 @@ export default {
 	padding: 10px 30px 10px 30px;
 }
 .game .stats {
+	padding: 10px 30px 10px 30px;
+	text-align: center;
+}
+.game .items {
 	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
@@ -115,5 +140,16 @@ export default {
 	height: 100%;
 	width: 100%;
 	border-radius: 100%;
+}
+.table {
+	display: table;
+}
+.tableRow {
+	display: table-row;
+}
+.tableCell {
+	display: table-cell;
+	height: 35px;
+	width: 35px;
 }
 </style>
