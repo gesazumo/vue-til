@@ -1,10 +1,8 @@
 <template>
 	<div>
-		recent game
-		<div :style="{ float: 'left', width: '40%' }">1</div>
-		<div :style="{ float: 'left', width: '40%' }">1</div>
-
-		<game />
+		<div v-for="game in recentGameList" :key="game.gameId">
+			<game :gameObject="game" />
+		</div>
 	</div>
 </template>
 
@@ -18,6 +16,7 @@ export default {
 		return {
 			beginIndex: 0,
 			endIndex: 5,
+			recentGameList: [],
 		}
 	},
 	computed: {
@@ -36,7 +35,7 @@ export default {
 				this.beginIndex,
 				this.endIndex,
 			)
-			console.log(data)
+			this.recentGameList = data
 		},
 	},
 }

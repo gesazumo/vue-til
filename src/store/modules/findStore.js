@@ -51,6 +51,11 @@ const findStore = {
 		getSummonerAccountId: state => {
 			return state.summoner.accountId
 		},
+		getQueues: state => currendQueueId => {
+			return state.queues.find(queue => {
+				return queue.queueId == currendQueueId
+			})
+		},
 	},
 }
 

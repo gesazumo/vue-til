@@ -1,9 +1,13 @@
 <template>
 	<div class="game win">
 		<div class="gameStats">
-			<div class="font-weight-bold" :style="grayFont">궁극기모드</div>
-			<div class="font-weight-light" :style="grayFont">21시간전</div>
-			<div>패배</div>
+			<div class="font-weight-bold" :style="grayFont">
+				{{ getQueues(gameObject.queue).description }}
+			</div>
+			<div class="font-weight-light" :style="grayFont">
+				{{ playDate }}
+			</div>
+			<div>{{ isWin }}</div>
 			<div class="font-weight-light" :style="grayFont">23분 15초</div>
 		</div>
 		<div class="champ">
@@ -96,11 +100,82 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
 	data() {
 		return {
 			grayFont: { color: 'gray' },
 		}
+	},
+	props: {
+		gameObject: {
+			type: Object,
+			default: null,
+		},
+	},
+	methods: {
+		timeForToday(value) {
+			const today = new Date()
+			const timeValue = new Date(value)
+
+			const betweenTime = Math.floor(
+				(today.getTime() - timeValue.getTime()) / 1000 / 60,
+			)
+			if (betweenTime < 1) return '방금전'
+			if (betweenTime < 60) {
+				return `${betweenTime}분전`
+			}
+
+			const betweenTimeHour = Math.floor(betweenTime / 60)
+			if (betweenTimeHour < 24) {
+				return `${betweenTimeHour}시간전`
+			}
+
+			const betweenTimeDay = Math.floor(betweenTime / 60 / 24)
+			if (betweenTimeDay < 365) {
+				return `${betweenTimeDay}일전`
+			}
+
+			return `${Math.floor(betweenTimeDay / 365)}년전`
+		},
+	},
+	computed: {
+		...mapGetters('findStore', [
+			'getSummonerAccountId',
+			'getSummonerId',
+			'getQueues',
+		]),
+		participantIdentities() {
+			return this.gameObject.detail.participantIdentities.find(user => {
+				return (
+					user.player.accountId == this.getSummonerAccountId &&
+					user.player.summonerId == this.getSummonerId
+				)
+			})
+		},
+		participant() {
+			return this.gameObject.detail.participants[
+				this.participantIdentities.participantId - 1
+			]
+		},
+		participantTeam() {
+			const searcherTeam = this.gameObject.detail.teams.find(team => {
+				return team.teamId == this.participant.teamId
+			})
+			return searcherTeam
+		},
+		opposingTeam() {
+			const searcherTeam = this.gameObject.detail.teams.find(team => {
+				return team.teamId != this.participant.teamId
+			})
+			return searcherTeam
+		},
+		isWin() {
+			return this.participantTeam.win == 'Win' ? '승리' : '패배'
+		},
+		playDate() {
+			return this.timeForToday(this.gameObject.timestamp)
+		},
 	},
 }
 </script>
@@ -114,6 +189,7 @@ export default {
 	align-items: center;
 }
 .game .gameStats {
+	min-width: 250px;
 	padding: 10px 30px 10px 30px;
 }
 .game .champ {
