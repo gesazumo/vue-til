@@ -65,23 +65,30 @@
 			<div>Silver 4</div>
 		</div>
 		<div class="items">
-			<div class="table">
-				<div class="tableRow">
-					<div class="tableCell">
+			<div :style="{ width: '140px' }">
+				<div class="stackBox" v-for="i in 8" :key="i">
+					<img
+						class="spell"
+						:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<div class="champions">
+			<div :style="{ width: '280px' }">
+				<div
+					:style="{ width: '140px', float: 'left' }"
+					v-for="i in 10"
+					:key="i"
+				>
+					<div class="championBox">
 						<img
-							class="portrait"
+							class="spell"
 							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
 						/>
 					</div>
-					<div class="tableCell">1</div>
-					<div class="tableCell">1</div>
-					<div class="tableCell">1</div>
-				</div>
-				<div class="tableRow">
-					<div class="tableCell">1</div>
-					<div class="tableCell">1</div>
-					<div class="tableCell">1</div>
-					<div class="tableCell">1</div>
+					<div>SKT T1 Faker</div>
 				</div>
 			</div>
 		</div>
@@ -151,5 +158,17 @@ export default {
 	display: table-cell;
 	height: 35px;
 	width: 35px;
+}
+.stackBox {
+	float: left;
+	width: 35px;
+	height: 35px;
+	padding: 1px;
+}
+.championBox {
+	float: left;
+	width: 25px;
+	height: 25px;
+	padding: 1px;
 }
 </style>
