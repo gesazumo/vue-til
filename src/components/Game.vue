@@ -102,10 +102,12 @@
 		</div>
 		<div class="items">
 			<div :style="{ width: '140px' }">
-				<div class="stackBox" v-for="i in 8" :key="i">
+				<div class="stackBox" v-for="(n, index) in 7" :key="index">
 					<img
 						class="spell"
-						:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+						:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${
+							participant.stats['item' + index]
+						}.png`"
 					/>
 				</div>
 			</div>
