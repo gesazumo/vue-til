@@ -18,10 +18,11 @@ export default {
 		return {}
 	},
 	methods: {
-		...mapActions(['getChampionList']),
+		...mapActions(['getChampionList', 'getSpellList']),
 	},
 	created() {
 		this.getChampionList()
+		this.getSpellList()
 	},
 }
 </script>

@@ -17,20 +17,20 @@
 				<div :style="{ float: 'left' }">
 					<img
 						class="portrait"
-						:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+						:src="this.$getChampIcon(championInfo(participant.championId).id)"
 					/>
 				</div>
 				<div :style="{ float: 'left' }">
 					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
 						<img
 							class="spell"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							:src="this.$getSpellIcon(spellInfo(participant.spell1Id).id)"
 						/>
 					</div>
 					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
 						<img
 							class="spell"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							:src="this.$getSpellIcon(spellInfo(participant.spell2Id).id)"
 						/>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 				:style="{ clear: 'both', textAlign: 'center' }"
 				class="font-weight-light"
 			>
-				아리
+				{{ championInfo(participant.championId).name }}
 			</div>
 		</div>
 		<div class="score">
@@ -78,6 +78,7 @@
 				평점
 			</div>
 			<div
+				v-if="multiKill > 0"
 				:style="{
 					textAlign: 'center',
 					background: '#ee5a52',
@@ -87,7 +88,7 @@
 					color: 'white',
 				}"
 			>
-				{{ 2 | killName }}
+				{{ multiKill | killName }}
 			</div>
 		</div>
 		<div class="stats">
@@ -132,6 +133,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
 	data() {
 		return {
@@ -178,6 +180,7 @@ export default {
 			'getSummonerId',
 			'getQueues',
 		]),
+		...mapGetters(['championInfo', 'spellInfo']),
 		participantIdentities() {
 			return this.gameObject.detail.participantIdentities.find(user => {
 				return (
@@ -220,6 +223,13 @@ export default {
 						borderColor: '#cea7a7',
 				  }
 		},
+		multiKill() {
+			if (this.participant.stats.pentaKills > 0) return 5
+			else if (this.participant.stats.quadraKills > 0) return 4
+			else if (this.participant.stats.tripleKills > 0) return 3
+			else if (this.participant.stats.doubleKills > 0) return 2
+			return 0
+		},
 	},
 }
 </script>
@@ -228,6 +238,7 @@ export default {
 .game {
 	display: flex;
 	align-items: center;
+	margin: 10px;
 }
 .game .gameStats {
 	min-width: 250px;
@@ -237,7 +248,9 @@ export default {
 	padding: 10px 30px 10px 30px;
 }
 .game .score {
+	min-width: 200px;
 	padding: 10px 30px 10px 30px;
+	text-align: center;
 }
 .game .stats {
 	padding: 10px 30px 10px 30px;

@@ -6,7 +6,7 @@
 					<div>
 						<img
 							class="icon"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${summoner.profileIconId}.png`"
+							:src="this.$getSummonerIcon(summoner.profileIconId)"
 						/>
 						<div class="level">{{ summoner.summonerLevel }}</div>
 					</div>

@@ -6,9 +6,9 @@
 				<div>
 					<img class="portrait" src="@/assets/logo.png" />
 					<div class="payment">
-						<sapn class="org-payment">ddd</sapn>
+						<span class="org-payment">ddd</span>
 						㉾
-						<sapn class="sale-payment">123</sapn>
+						<span class="sale-payment">123</span>
 					</div>
 					<div class="skin-name">전산</div>
 				</div>

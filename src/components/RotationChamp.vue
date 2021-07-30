@@ -2,9 +2,7 @@
 	<div class="rotation-champion-box">
 		<img
 			class="portrait"
-			:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/${
-				championInfo(champKey).id
-			}.png`"
+			:src="this.$getChampIcon(championInfo(champKey).id)"
 		/>
 		<div class="champion-name">
 			{{ championInfo(champKey).name }}

@@ -14,3 +14,15 @@ export const multiKillNameList = {
 	4: '쿼드라킬',
 	5: '펜타킬',
 }
+
+export const staticImageAPI =
+	process.env.VUE_APP_DDRAGON_API_URI +
+	process.env.VUE_APP_DDRAGON_VERSION +
+	'/img/'
+
+export const staticURL = {
+	summonerIcon: 'profileicon/',
+	champion: 'champion/',
+	spell: 'spell/',
+	item: 'item/',
+}
