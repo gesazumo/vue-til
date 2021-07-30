@@ -8,7 +8,7 @@ const url = {
 }
 
 export const fetchFindUser = summonerName => {
-	return instance.get(`${url.find}${summonerName}`)
+	return instance.get(url.find + summonerName)
 }
 
 export const fetchFindUserRankInfo = id => {

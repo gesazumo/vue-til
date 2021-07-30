@@ -1,5 +1,5 @@
 <template>
-	<div class="game win">
+	<div class="game" :style="gameResultStyle">
 		<div class="gameStats">
 			<div class="font-weight-bold" :style="grayFont">
 				{{ getQueues(gameObject.queue).description }}
@@ -7,7 +7,9 @@
 			<div class="font-weight-light" :style="grayFont">
 				{{ playDate }}
 			</div>
-			<div>{{ isWin }}</div>
+			<div :style="isWin ? winFont : loseFont">
+				{{ isWin ? '승리' : '패배' }}
+			</div>
 			<div class="font-weight-light" :style="grayFont">23분 15초</div>
 		</div>
 		<div class="champ">
@@ -105,6 +107,8 @@ export default {
 	data() {
 		return {
 			grayFont: { color: 'gray' },
+			winFont: { color: '#1a78ae' },
+			loseFont: { color: '#c6443e' },
 		}
 	},
 	props: {
@@ -171,19 +175,27 @@ export default {
 			return searcherTeam
 		},
 		isWin() {
-			return this.participantTeam.win == 'Win' ? '승리' : '패배'
+			return this.participantTeam.win == 'Win' ? true : false
 		},
 		playDate() {
 			return this.timeForToday(this.gameObject.timestamp)
+		},
+		gameResultStyle() {
+			return this.participantTeam.win == 'Win'
+				? {
+						backgroundColor: '#a3cfec',
+						borderColor: '#99b9cf',
+				  }
+				: {
+						backgroundColor: '#e2b6b3',
+						borderColor: '#cea7a7',
+				  }
 		},
 	},
 }
 </script>
 
 <style>
-.win {
-	background-color: #e2b6b3;
-}
 .game {
 	display: flex;
 	align-items: center;

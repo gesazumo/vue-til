@@ -2,7 +2,7 @@ import { instance, ddragonInstance } from './index'
 
 const url = {
 	rotation: 'init/rotation',
-	allChampions: 'ko_KR/champion.json',
+	allChampions: '/data/ko_KR/champion.json',
 }
 
 export const fetchAllChampions = () => {

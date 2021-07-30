@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-const RIOT_API_URL = 'http://localhost:3000/'
-const DDRAGON_API_URL = 'https://ddragon.leagueoflegends.com/cdn/11.14.1/data/'
+// eslint-disable-next-line no-undef
+const RIOT_API_URL = process.env.VUE_APP_API_URI
+
+const DDRAGON_API_URL =
+	process.env.VUE_APP_DDRAGON_API_URI + process.env.VUE_APP_DDRAGON_VERSION
 const STATIC_API_URL = 'https://static.developer.riotgames.com/docs/lol/'
 
 function createDdragonInstance() {
@@ -19,6 +22,9 @@ function createStaticInstance() {
 function createInstance() {
 	return axios.create({
 		baseURL: RIOT_API_URL,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		},
 	})
 }
 
