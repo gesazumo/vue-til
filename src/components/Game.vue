@@ -59,12 +59,41 @@
 		</div>
 		<div class="score">
 			<div class="kda">
-				<h1 :style="grayFont">8/<span class="death">8</span>/8</h1>
+				<h1 :style="grayFont">
+					{{ participant.stats.kills }}/<span class="death">{{
+						participant.stats.deaths
+					}}</span
+					>/{{ participant.stats.assists }}
+				</h1>
 			</div>
-			<div><span class="font-weight-bold">1.22:1</span> 평점</div>
+			<div>
+				<span class="font-weight-bold"
+					>{{
+						(
+							(participant.stats.kills + participant.stats.assists) /
+							participant.stats.deaths
+						).toFixed(2)
+					}}:1</span
+				>
+				평점
+			</div>
+			<div
+				:style="{
+					textAlign: 'center',
+					background: '#ee5a52',
+					display: 'inline-block',
+					borderRadius: '15px',
+					padding: '2px 5px',
+					color: 'white',
+				}"
+			>
+				{{ 2 | killName }}
+			</div>
 		</div>
 		<div class="stats">
-			<div class="font-weight-light" :style="grayFont">레벨15</div>
+			<div class="font-weight-light" :style="grayFont">
+				레벨{{ participant.stats.champLevel }}
+			</div>
 			<div class="font-weight-light" :style="grayFont">89 (3.8) CS</div>
 			<div>킬관여 44%</div>
 			<div class="font-weight-light" :style="grayFont">매치 평균</div>
