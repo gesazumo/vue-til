@@ -15,7 +15,7 @@ export default {
 	data() {
 		return {
 			beginIndex: 0,
-			endIndex: 5,
+			endIndex: 10,
 			recentGameList: [],
 		}
 	},

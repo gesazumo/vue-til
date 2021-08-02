@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<v-card class="mx-auto" max-width="400" outlined>
+	<div :style="{ marginLeft: '10px' }">
+		<v-card class="mx-auto" width="350" outlined>
 			<v-list-item three-line>
 				<v-list-item-content>
 					<div>{{ title }}</div>

@@ -21,10 +21,10 @@
 						<v-btn small color="primary" dark> 전적갱신 </v-btn>
 					</v-list-item-subtitle>
 				</v-list-item-content>
+				<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
+				<rank-info :rank-info="flexRankInfo" title="자유랭크" />
 			</v-list-item>
 		</v-card>
-		<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
-		<rank-info :rank-info="flexRankInfo" title="자유랭크" />
 	</div>
 </template>
 
