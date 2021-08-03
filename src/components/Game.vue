@@ -117,16 +117,18 @@
 			<div :style="{ width: '280px' }">
 				<div
 					:style="{ width: '140px', float: 'left' }"
-					v-for="i in 10"
+					v-for="i in team1List"
 					:key="i"
 				>
 					<div class="championBox">
 						<img
 							class="spell"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${
+								championInfo(i.championId).id
+							}.png`"
 						/>
 					</div>
-					<div>SKT T1 Faker</div>
+					<div>{{ i.player.summonerName }}</div>
 				</div>
 			</div>
 		</div>
@@ -231,6 +233,17 @@ export default {
 			else if (this.participant.stats.tripleKills > 0) return 3
 			else if (this.participant.stats.doubleKills > 0) return 2
 			return 0
+		},
+		team1List() {
+			// 이거 getter에서 걍 state 안보고 param만 받아서 그때마다 team1, 2 구분해서 리스트 뽑을수 잇나?
+			const teamList = []
+			for (let i = 0; i < 5; i++) {
+				teamList.push({
+					...this.gameObject.detail.participantIdentities[i],
+					...this.gameObject.detail.participants[i],
+				})
+			}
+			return teamList
 		},
 	},
 }
