@@ -114,21 +114,48 @@
 		</div>
 
 		<div class="champions">
-			<div :style="{ width: '280px' }">
+			<div :style="{ width: '140px' }">
 				<div
 					:style="{ width: '140px', float: 'left' }"
 					v-for="i in team1List"
-					:key="i"
+					:key="i.participantId"
 				>
 					<div class="championBox">
 						<img
 							class="spell"
+							:style="
+								i.participantId == participantIdentities.participantId
+									? { borderRadius: '100%' }
+									: {}
+							"
 							:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${
 								championInfo(i.championId).id
 							}.png`"
 						/>
 					</div>
-					<div>{{ i.player.summonerName }}</div>
+					<div>{{ i.player.summonerName | textCut(6) }}</div>
+				</div>
+			</div>
+			<div :style="{ width: '140px' }">
+				<div
+					:style="{ width: '140px', float: 'left' }"
+					v-for="i in team2List"
+					:key="i.participantId"
+				>
+					<div class="championBox">
+						<img
+							class="spell"
+							:style="
+								i.participantId == participantIdentities.participantId
+									? { borderRadius: '100%' }
+									: {}
+							"
+							:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${
+								championInfo(i.championId).id
+							}.png`"
+						/>
+					</div>
+					<div>{{ i.player.summonerName | textCut(6) }}</div>
 				</div>
 			</div>
 		</div>
@@ -245,6 +272,17 @@ export default {
 			}
 			return teamList
 		},
+		team2List() {
+			// 이거 getter에서 걍 state 안보고 param만 받아서 그때마다 team1, 2 구분해서 리스트 뽑을수 잇나?
+			const teamList = []
+			for (let i = 5; i < 10; i++) {
+				teamList.push({
+					...this.gameObject.detail.participantIdentities[i],
+					...this.gameObject.detail.participants[i],
+				})
+			}
+			return teamList
+		},
 	},
 }
 </script>
@@ -274,6 +312,10 @@ export default {
 .game .items {
 	padding: 10px 30px 10px 30px;
 	text-align: center;
+}
+.game .champions {
+	padding: 10px 30px 10px 30px;
+	display: flex;
 }
 .game .score .kda .death {
 	color: red;
