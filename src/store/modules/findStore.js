@@ -1,18 +1,21 @@
 import { fetchFindUser, fetchQueues } from '@/api/find'
 import { SET_SUMMONER, SET_QUEUES } from '../mutation-type'
 
+const initState = {
+	summoner: {
+		id: '',
+		accountId: '',
+		puuid: '',
+		name: '',
+		profileIconId: 0,
+		revisionDate: 0,
+		summonerLevel: '',
+	},
+}
 const findStore = {
 	namespaced: true,
 	state: () => ({
-		summoner: {
-			id: '',
-			accountId: '',
-			puuid: '',
-			name: '',
-			profileIconId: 0,
-			revisionDate: 0,
-			summonerLevel: '',
-		},
+		...initState,
 	}),
 	mutations: {
 		[SET_SUMMONER](state, { summoner }) {
@@ -24,6 +27,7 @@ const findStore = {
 	},
 	actions: {
 		async setSummoner({ commit }, summonerName) {
+			commit(SET_SUMMONER, { summoner: initState.summoner })
 			try {
 				const { data } = await fetchFindUser(summonerName)
 				commit(SET_SUMMONER, { summoner: data })
