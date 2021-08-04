@@ -5,12 +5,12 @@
 				<slot name="temp"></slot>
 			</div>
 		</template>
-		<!-- <div v-if="itemId" :style="{ maxWidth: '450px' }">
+		<div v-if="itemId" :style="{ maxWidth: '450px' }">
 			<div class="title">
-				{{ this.$getSpellInfo(spellId).name }}
+				{{ this.$getItemInfo(itemId).name }}
 			</div>
-			{{ this.$getSpellInfo(spellId).description }}
-		</div> -->
+			{{ this.$getItemInfo(itemId).plaintext }}
+		</div>
 	</v-tooltip>
 </template>
 

@@ -18,11 +18,10 @@ export default {
 		return {}
 	},
 	methods: {
-		...mapActions(['getChampionList', 'getSpellList']),
+		...mapActions(['callInitApi']),
 	},
 	created() {
-		this.getChampionList()
-		this.getSpellList()
+		this.callInitApi()
 	},
 }
 </script>

@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { fetchAllChampions, fetchAllSpells } from '../api/init'
-import { SET_CHAMPION_LIST, SET_LOADING, SET_SPELL_LIST } from './mutation-type'
+import { fetchAllChampions, fetchAllItems, fetchAllSpells } from '../api/init'
+import {
+	SET_CHAMPION_LIST,
+	SET_LOADING,
+	SET_SPELL_LIST,
+	SET_ITEM_LIST,
+} from './mutation-type'
 
 Vue.use(Vuex)
 
@@ -15,6 +20,7 @@ export default new Vuex.Store({
 		summonerName: null,
 		championList: {},
 		spellList: {},
+		itemList: {},
 		loading: false,
 	},
 	getters: {
@@ -32,6 +38,9 @@ export default new Vuex.Store({
 				}
 			}
 		},
+		itemInfo: state => key => {
+			return state.itemList[key]
+		},
 	},
 	mutations: {
 		[SET_CHAMPION_LIST](state, { championList }) {
@@ -42,6 +51,9 @@ export default new Vuex.Store({
 		},
 		[SET_LOADING](state, { flag }) {
 			state.loading = flag
+		},
+		[SET_ITEM_LIST](state, { itemList }) {
+			state.itemList = itemList
 		},
 	},
 
@@ -54,11 +66,17 @@ export default new Vuex.Store({
 			const { data } = await fetchAllSpells()
 			commit(SET_SPELL_LIST, { spellList: data.data })
 		},
+		async getItemList({ commit }) {
+			const { data } = await fetchAllItems()
+			commit(SET_ITEM_LIST, { itemList: data.data })
+		},
 		async callInitApi({ dispatch, commit }) {
 			commit(SET_LOADING, { flag: true })
+			console.log('init!')
 			try {
 				dispatch('getChampionList')
 				dispatch('getSpellList')
+				dispatch('getItemList')
 			} catch (error) {
 				console.log(error)
 			} finally {

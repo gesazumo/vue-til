@@ -20,6 +20,10 @@ const util = {
 	$getSpellInfo(id) {
 		return this.$store.getters.spellInfo(id)
 	},
+
+	$getItemInfo(id) {
+		return this.$store.getters.itemInfo(id)
+	},
 }
 
 export default util

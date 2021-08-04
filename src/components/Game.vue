@@ -128,7 +128,7 @@
 		<div class="items">
 			<div :style="{ width: '140px' }">
 				<div class="stackBox" v-for="(n, index) in 7" :key="index">
-					<item-tool-tip>
+					<item-tool-tip :itemId="participant.stats['item' + index]">
 						<template v-slot:temp>
 							<img
 								class="spell"

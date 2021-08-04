@@ -4,6 +4,7 @@ const url = {
 	rotation: 'init/rotation',
 	allChampions: '/data/ko_KR/champion.json',
 	allSpell: '/data/ko_KR/summoner.json',
+	allItem: '/data/ko_KR/item.json',
 }
 
 export const fetchAllChampions = () => {
@@ -16,4 +17,8 @@ export const fetchAllSpells = () => {
 
 export const fetchRotationChampions = () => {
 	return instance.get(`${url.rotation}`)
+}
+
+export const fetchAllItems = () => {
+	return ddragonInstance.get(`${url.allItem}`)
 }
