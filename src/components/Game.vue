@@ -17,20 +17,35 @@
 				<div :style="{ float: 'left' }">
 					<img
 						class="portrait"
-						:src="this.$getChampIcon(championInfo(participant.championId).id)"
+						:src="
+							getChampIcon + championInfo(participant.championId).id + '.png'
+						"
 					/>
 				</div>
+
 				<div :style="{ float: 'left' }">
+					<v-tooltip top>
+						<template v-slot:activator="{ on, attrs }">
+							<div
+								:style="{ width: '35px', height: '35px', padding: '1px' }"
+								v-bind="attrs"
+								v-on="on"
+							>
+								<img
+									class="spell"
+									:src="
+										getSpellIcon + spellInfo(participant.spell1Id).id + '.png'
+									"
+								/>
+							</div>
+						</template>
+						<spell-tool-tip :spellId="participant.spell1Id" />
+					</v-tooltip>
+
 					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
 						<img
 							class="spell"
-							:src="this.$getSpellIcon(spellInfo(participant.spell1Id).id)"
-						/>
-					</div>
-					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
-						<img
-							class="spell"
-							:src="this.$getSpellIcon(spellInfo(participant.spell2Id).id)"
+							:src="getSpellIcon + spellInfo(participant.spell2Id).id + '.png'"
 						/>
 					</div>
 				</div>
@@ -105,9 +120,7 @@
 				<div class="stackBox" v-for="(n, index) in 7" :key="index">
 					<img
 						class="spell"
-						:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/item/${
-							participant.stats['item' + index]
-						}.png`"
+						:src="getItemIcon + participant.stats['item' + index] + '.png'"
 					/>
 				</div>
 			</div>
@@ -128,9 +141,7 @@
 									? { borderRadius: '100%' }
 									: {}
 							"
-							:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${
-								championInfo(i.championId).id
-							}.png`"
+							:src="getChampIcon + championInfo(i.championId).id + '.png'"
 						/>
 					</div>
 					<div>{{ i.player.summonerName | textCut(6) }}</div>
@@ -150,9 +161,7 @@
 									? { borderRadius: '100%' }
 									: {}
 							"
-							:src="`https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/${
-								championInfo(i.championId).id
-							}.png`"
+							:src="getChampIcon + championInfo(i.championId).id + '.png'"
 						/>
 					</div>
 					<div>{{ i.player.summonerName | textCut(6) }}</div>

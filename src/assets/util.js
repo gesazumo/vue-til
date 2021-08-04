@@ -16,6 +16,10 @@ const util = {
 	$getItemIcon(key) {
 		return staticImageAPI + staticURL.item + key + '.png'
 	},
+
+	$getSpellInfo(id) {
+		return this.$store.getters.spellInfo(id)
+	},
 }
 
 export default util
