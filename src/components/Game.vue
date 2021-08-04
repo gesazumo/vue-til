@@ -41,13 +41,23 @@
 						</template>
 						<spell-tool-tip :spellId="participant.spell1Id" />
 					</v-tooltip>
-
-					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
-						<img
-							class="spell"
-							:src="getSpellIcon + spellInfo(participant.spell2Id).id + '.png'"
-						/>
-					</div>
+					<v-tooltip top>
+						<template v-slot:activator="{ on, attrs }">
+							<div
+								:style="{ width: '35px', height: '35px', padding: '1px' }"
+								v-bind="attrs"
+								v-on="on"
+							>
+								<img
+									class="spell"
+									:src="
+										getSpellIcon + spellInfo(participant.spell2Id).id + '.png'
+									"
+								/>
+							</div>
+						</template>
+						<spell-tool-tip :spellId="participant.spell2Id" />
+					</v-tooltip>
 				</div>
 				<div :style="{ float: 'left' }">
 					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
@@ -118,14 +128,17 @@
 		<div class="items">
 			<div :style="{ width: '140px' }">
 				<div class="stackBox" v-for="(n, index) in 7" :key="index">
-					<img
-						class="spell"
-						:src="getItemIcon + participant.stats['item' + index] + '.png'"
-					/>
+					<item-tool-tip>
+						<template v-slot:temp>
+							<img
+								class="spell"
+								:src="getItemIcon + participant.stats['item' + index] + '.png'"
+							/>
+						</template>
+					</item-tool-tip>
 				</div>
 			</div>
 		</div>
-
 		<div class="champions">
 			<div :style="{ width: '140px' }">
 				<div
@@ -173,8 +186,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ItemToolTip from './modal/ItemToolTip.vue'
 
 export default {
+	components: { ItemToolTip },
 	data() {
 		return {
 			grayFont: { color: 'gray' },

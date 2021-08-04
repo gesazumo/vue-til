@@ -1,6 +1,6 @@
 <template>
-	<div v-if="spellId">
-		<div>
+	<div v-if="spellId" :style="{ maxWidth: '450px' }">
+		<div class="title">
 			{{ this.$getSpellInfo(spellId).name }}
 		</div>
 		{{ this.$getSpellInfo(spellId).description }}
@@ -19,4 +19,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.title {
+	color: coral;
+}
+</style>
