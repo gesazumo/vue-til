@@ -24,8 +24,8 @@
 				</div>
 
 				<div :style="{ float: 'left' }">
-					<v-tooltip top>
-						<template v-slot:activator="{ on, attrs }">
+					<spell-tool-tip :spellId="participant.spell1Id">
+						<template v-slot:temp>
 							<div
 								:style="{ width: '35px', height: '35px', padding: '1px' }"
 								v-bind="attrs"
@@ -39,10 +39,9 @@
 								/>
 							</div>
 						</template>
-						<spell-tool-tip :spellId="participant.spell1Id" />
-					</v-tooltip>
-					<v-tooltip top>
-						<template v-slot:activator="{ on, attrs }">
+					</spell-tool-tip>
+					<spell-tool-tip :spellId="participant.spell2Id">
+						<template v-slot:temp>
 							<div
 								:style="{ width: '35px', height: '35px', padding: '1px' }"
 								v-bind="attrs"
@@ -56,8 +55,7 @@
 								/>
 							</div>
 						</template>
-						<spell-tool-tip :spellId="participant.spell2Id" />
-					</v-tooltip>
+					</spell-tool-tip>
 				</div>
 				<div :style="{ float: 'left' }">
 					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
@@ -186,10 +184,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ItemToolTip from './modal/ItemToolTip.vue'
 
 export default {
-	components: { ItemToolTip },
 	data() {
 		return {
 			grayFont: { color: 'gray' },
@@ -199,7 +195,7 @@ export default {
 	},
 	props: {
 		gameObject: {
-			type: Object,
+			type: Array,
 			default: null,
 		},
 	},
