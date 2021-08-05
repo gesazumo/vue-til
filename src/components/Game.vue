@@ -26,11 +26,7 @@
 				<div :style="{ float: 'left' }">
 					<spell-tool-tip :spellId="participant.spell1Id">
 						<template v-slot:temp>
-							<div
-								:style="{ width: '35px', height: '35px', padding: '1px' }"
-								v-bind="attrs"
-								v-on="on"
-							>
+							<div :style="{ width: '35px', height: '35px', padding: '1px' }">
 								<img
 									class="spell"
 									:src="
@@ -42,11 +38,7 @@
 					</spell-tool-tip>
 					<spell-tool-tip :spellId="participant.spell2Id">
 						<template v-slot:temp>
-							<div
-								:style="{ width: '35px', height: '35px', padding: '1px' }"
-								v-bind="attrs"
-								v-on="on"
-							>
+							<div :style="{ width: '35px', height: '35px', padding: '1px' }">
 								<img
 									class="spell"
 									:src="
@@ -195,7 +187,7 @@ export default {
 	},
 	props: {
 		gameObject: {
-			type: Array,
+			type: Object,
 			default: null,
 		},
 	},
