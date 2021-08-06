@@ -40,6 +40,8 @@ export default {
 				this.beginIndex,
 				this.endIndex,
 			)
+			this.beginIndex = this.endIndex
+			this.endIndex = this.endIndex + 10
 			this.recentGameList = data
 		},
 		infiniteHandler($state) {
@@ -49,6 +51,8 @@ export default {
 					console.log(summonerId)
 					console.log(data)
 					this.recentGameList.push(...data)
+					this.beginIndex = this.endIndex
+					this.endIndex = this.endIndex + 10
 					$state.loaded()
 				},
 			)
