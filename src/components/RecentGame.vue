@@ -3,15 +3,20 @@
 		<div v-for="game in recentGameList" :key="game.gameId">
 			<game :gameObject="game" />
 		</div>
+		<infinite-loading
+			@infinite="infiniteHandler"
+			v-if="recentGameList.length > 0"
+		></infinite-loading>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import InfiniteLoading from 'vue-infinite-loading'
 import { fetchFindRecentGame } from '../api/find'
 import Game from './Game.vue'
 export default {
-	components: { Game },
+	components: { Game, InfiniteLoading },
 	data() {
 		return {
 			beginIndex: 0,
@@ -36,6 +41,17 @@ export default {
 				this.endIndex,
 			)
 			this.recentGameList = data
+		},
+		infiniteHandler($state) {
+			const summonerId = this.getSummonerAccountId
+			fetchFindRecentGame(summonerId, this.beginIndex, this.endIndex).then(
+				({ data }) => {
+					console.log(summonerId)
+					console.log(data)
+					this.recentGameList.push(...data)
+					$state.loaded()
+				},
+			)
 		},
 	},
 }
