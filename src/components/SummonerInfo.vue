@@ -18,7 +18,9 @@
 					</v-list-item-title>
 					<div class="ranking">래더랭킹 상위 1위(1%)</div>
 					<v-list-item-subtitle>
-						<v-btn small color="primary" dark> 전적갱신 </v-btn>
+						<v-btn small color="primary" dark @click="reloadMatch">
+							전적갱신
+						</v-btn>
 					</v-list-item-subtitle>
 				</v-list-item-content>
 				<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
@@ -57,6 +59,9 @@ export default {
 			const { data } = await fetchFindUserRankInfo(summonerId)
 			this.soloRankInfo = data.solo
 			this.flexRankInfo = data.flex
+		},
+		reloadMatch() {
+			this.$router.go(this.$router.currentRoute)
 		},
 	},
 }

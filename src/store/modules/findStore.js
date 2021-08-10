@@ -27,7 +27,7 @@ const findStore = {
 	},
 	actions: {
 		async setSummoner({ commit }, summonerName) {
-			commit(SET_SUMMONER, { summoner: initState.summoner })
+			// commit(SET_SUMMONER, { summoner: initState.summoner })
 			try {
 				const { data } = await fetchFindUser(summonerName)
 				commit(SET_SUMMONER, { summoner: data })

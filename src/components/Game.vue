@@ -189,6 +189,7 @@ export default {
 		gameObject: {
 			type: Object,
 			default: null,
+			require: true,
 		},
 	},
 	methods: {

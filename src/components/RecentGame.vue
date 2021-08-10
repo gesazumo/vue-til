@@ -29,6 +29,9 @@ export default {
 	},
 	watch: {
 		getSummonerAccountId() {
+			this.beginIndex = 0
+			this.endIndex = 10
+			this.recentGameList = []
 			this.getRecentGames()
 		},
 	},

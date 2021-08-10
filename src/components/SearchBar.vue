@@ -25,11 +25,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
 	data() {
 		return {
 			summonerName: null,
 		}
+	},
+	computed: {
+		...mapState('findStore', ['summoner']),
 	},
 	watch: {
 		$route(to) {
@@ -38,6 +42,8 @@ export default {
 	},
 	methods: {
 		async doSearch() {
+			if (this.summoner.name == this.summonerName)
+				return this.$router.go(this.$router.currentRoute)
 			const summonerName = this.summonerName
 			this.$router.push({ path: `/find/${summonerName}` })
 		},
