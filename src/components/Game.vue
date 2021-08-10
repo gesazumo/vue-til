@@ -118,7 +118,10 @@
 		<div class="items">
 			<div :style="{ width: '140px' }">
 				<div class="stackBox" v-for="(n, index) in 7" :key="index">
-					<item-tool-tip :itemId="participant.stats['item' + index]">
+					<item-tool-tip
+						:itemId="participant.stats['item' + index]"
+						v-if="participant.stats['item' + index] != 0"
+					>
 						<template v-slot:temp>
 							<img
 								class="spell"
@@ -126,6 +129,10 @@
 							/>
 						</template>
 					</item-tool-tip>
+					<div
+						class="spell"
+						v-if="participant.stats['item' + index] == 0"
+					></div>
 				</div>
 			</div>
 		</div>
@@ -342,7 +349,9 @@ export default {
 	height: 100%;
 	width: 100%;
 	border-radius: 15%;
+	background-color: dimgray;
 }
+
 .game .lune {
 	height: 100%;
 	width: 100%;
