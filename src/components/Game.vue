@@ -1,190 +1,197 @@
 <template>
-	<div class="game" :style="gameResultStyle">
-		<div class="gameStats">
-			<div class="font-weight-bold" :style="grayFont">
-				{{ getQueues(gameObject.queue).description }}
-			</div>
-			<div class="font-weight-light" :style="grayFont">
-				{{ playDate }}
-			</div>
-			<div :style="isWin ? winFont : loseFont">
-				{{ isWin ? '승리' : '패배' }}
-			</div>
-			<div class="font-weight-light" :style="grayFont">23분 15초</div>
-		</div>
-		<div class="champ">
-			<div style="{ display: 'flex', align-items: 'center' }">
-				<div :style="{ float: 'left' }">
-					<img
-						class="portrait"
-						:src="
-							getChampIcon + championInfo(participant.championId).id + '.png'
-						"
-					/>
+	<div>
+		<div class="game" :style="gameResultStyle">
+			<div class="gameStats">
+				<div class="font-weight-bold" :style="grayFont">
+					{{ getQueues(gameObject.queue).description }}
 				</div>
-
-				<div :style="{ float: 'left' }">
-					<spell-tool-tip :spellId="participant.spell1Id">
-						<template v-slot:temp>
-							<div :style="{ width: '35px', height: '35px', padding: '1px' }">
-								<img
-									class="spell"
-									:src="
-										getSpellIcon + spellInfo(participant.spell1Id).id + '.png'
-									"
-								/>
-							</div>
-						</template>
-					</spell-tool-tip>
-					<spell-tool-tip :spellId="participant.spell2Id">
-						<template v-slot:temp>
-							<div :style="{ width: '35px', height: '35px', padding: '1px' }">
-								<img
-									class="spell"
-									:src="
-										getSpellIcon + spellInfo(participant.spell2Id).id + '.png'
-									"
-								/>
-							</div>
-						</template>
-					</spell-tool-tip>
+				<div class="font-weight-light" :style="grayFont">
+					{{ playDate }}
 				</div>
-				<div :style="{ float: 'left' }">
-					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
+				<div :style="isWin ? winFont : loseFont">
+					{{ isWin ? '승리' : '패배' }}
+				</div>
+				<div class="font-weight-light" :style="grayFont">23분 15초</div>
+			</div>
+			<div class="champ">
+				<div style="{ display: 'flex', align-items: 'center' }">
+					<div :style="{ float: 'left' }">
 						<img
-							class="lune"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							class="portrait"
+							:src="
+								getChampIcon + championInfo(participant.championId).id + '.png'
+							"
 						/>
 					</div>
-					<div :style="{ width: '35px', height: '35px', padding: '1px' }">
-						<img
-							class="lune"
-							:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
-						/>
+
+					<div :style="{ float: 'left' }">
+						<spell-tool-tip :spellId="participant.spell1Id">
+							<template v-slot:temp>
+								<div :style="{ width: '35px', height: '35px', padding: '1px' }">
+									<img
+										class="spell"
+										:src="
+											getSpellIcon + spellInfo(participant.spell1Id).id + '.png'
+										"
+									/>
+								</div>
+							</template>
+						</spell-tool-tip>
+						<spell-tool-tip :spellId="participant.spell2Id">
+							<template v-slot:temp>
+								<div :style="{ width: '35px', height: '35px', padding: '1px' }">
+									<img
+										class="spell"
+										:src="
+											getSpellIcon + spellInfo(participant.spell2Id).id + '.png'
+										"
+									/>
+								</div>
+							</template>
+						</spell-tool-tip>
+					</div>
+					<div :style="{ float: 'left' }">
+						<div :style="{ width: '35px', height: '35px', padding: '1px' }">
+							<img
+								class="lune"
+								:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							/>
+						</div>
+						<div :style="{ width: '35px', height: '35px', padding: '1px' }">
+							<img
+								class="lune"
+								:src="`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png`"
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div
-				:style="{ clear: 'both', textAlign: 'center' }"
-				class="font-weight-light"
-			>
-				{{ championInfo(participant.championId).name }}
-			</div>
-		</div>
-		<div class="score">
-			<div class="kda">
-				<h1 :style="grayFont">
-					{{ participant.stats.kills }}/<span class="death">{{
-						participant.stats.deaths
-					}}</span
-					>/{{ participant.stats.assists }}
-				</h1>
-			</div>
-			<div>
-				<span class="font-weight-bold"
-					>{{
-						(
-							(participant.stats.kills + participant.stats.assists) /
-							participant.stats.deaths
-						).toFixed(2)
-					}}:1</span
+				<div
+					:style="{ clear: 'both', textAlign: 'center' }"
+					class="font-weight-light"
 				>
-				평점
+					{{ championInfo(participant.championId).name }}
+				</div>
 			</div>
-			<div
-				v-if="multiKill > 0"
-				:style="{
-					textAlign: 'center',
-					background: '#ee5a52',
-					display: 'inline-block',
-					borderRadius: '15px',
-					padding: '2px 5px',
-					color: 'white',
-				}"
-			>
-				{{ multiKill | killName }}
-			</div>
-		</div>
-		<div class="stats">
-			<div class="font-weight-light" :style="grayFont">
-				레벨{{ participant.stats.champLevel }}
-			</div>
-			<div class="font-weight-light" :style="grayFont">89 (3.8) CS</div>
-			<div>킬관여 44%</div>
-			<div class="font-weight-light" :style="grayFont">매치 평균</div>
-			<div>Silver 4</div>
-		</div>
-		<div class="items">
-			<div :style="{ width: '140px' }">
-				<div class="stackBox" v-for="(n, index) in 7" :key="index">
-					<item-tool-tip
-						:itemId="participant.stats['item' + index]"
-						v-if="participant.stats['item' + index] != 0"
+			<div class="score">
+				<div class="kda">
+					<h1 :style="grayFont">
+						{{ participant.stats.kills }}/<span class="death">{{
+							participant.stats.deaths
+						}}</span
+						>/{{ participant.stats.assists }}
+					</h1>
+				</div>
+				<div>
+					<span class="font-weight-bold"
+						>{{
+							(
+								(participant.stats.kills + participant.stats.assists) /
+								participant.stats.deaths
+							).toFixed(2)
+						}}:1</span
 					>
-						<template v-slot:temp>
+					평점
+				</div>
+				<div
+					v-if="multiKill > 0"
+					:style="{
+						textAlign: 'center',
+						background: '#ee5a52',
+						display: 'inline-block',
+						borderRadius: '15px',
+						padding: '2px 5px',
+						color: 'white',
+					}"
+				>
+					{{ multiKill | killName }}
+				</div>
+			</div>
+			<div class="stats">
+				<div class="font-weight-light" :style="grayFont">
+					레벨{{ participant.stats.champLevel }}
+				</div>
+				<div class="font-weight-light" :style="grayFont">89 (3.8) CS</div>
+				<div>킬관여 44%</div>
+				<div class="font-weight-light" :style="grayFont">매치 평균</div>
+				<div>Silver 4</div>
+			</div>
+			<div class="items">
+				<div :style="{ width: '140px' }">
+					<div class="stackBox" v-for="(n, index) in 7" :key="index">
+						<item-tool-tip
+							:itemId="participant.stats['item' + index]"
+							v-if="participant.stats['item' + index] != 0"
+						>
+							<template v-slot:temp>
+								<img
+									class="spell"
+									:src="
+										getItemIcon + participant.stats['item' + index] + '.png'
+									"
+								/>
+							</template>
+						</item-tool-tip>
+						<div
+							class="spell"
+							v-if="participant.stats['item' + index] == 0"
+						></div>
+					</div>
+				</div>
+			</div>
+			<div class="champions">
+				<div :style="{ width: '140px' }">
+					<div
+						:style="{ width: '140px', float: 'left' }"
+						v-for="i in team1List"
+						:key="i.participantId"
+					>
+						<div class="championBox">
 							<img
 								class="spell"
-								:src="getItemIcon + participant.stats['item' + index] + '.png'"
+								:style="
+									i.participantId == participantIdentities.participantId
+										? { borderRadius: '100%' }
+										: {}
+								"
+								:src="getChampIcon + championInfo(i.championId).id + '.png'"
 							/>
-						</template>
-					</item-tool-tip>
+						</div>
+						<div>{{ i.player.summonerName | textCut(6) }}</div>
+					</div>
+				</div>
+				<div :style="{ width: '140px' }">
 					<div
-						class="spell"
-						v-if="participant.stats['item' + index] == 0"
-					></div>
+						:style="{ width: '140px', float: 'left' }"
+						v-for="i in team2List"
+						:key="i.participantId"
+					>
+						<div class="championBox">
+							<img
+								class="spell"
+								:style="
+									i.participantId == participantIdentities.participantId
+										? { borderRadius: '100%' }
+										: {}
+								"
+								:src="getChampIcon + championInfo(i.championId).id + '.png'"
+							/>
+						</div>
+						<div>{{ i.player.summonerName | textCut(6) }}</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="champions">
-			<div :style="{ width: '140px' }">
-				<div
-					:style="{ width: '140px', float: 'left' }"
-					v-for="i in team1List"
-					:key="i.participantId"
-				>
-					<div class="championBox">
-						<img
-							class="spell"
-							:style="
-								i.participantId == participantIdentities.participantId
-									? { borderRadius: '100%' }
-									: {}
-							"
-							:src="getChampIcon + championInfo(i.championId).id + '.png'"
-						/>
-					</div>
-					<div>{{ i.player.summonerName | textCut(6) }}</div>
-				</div>
-			</div>
-			<div :style="{ width: '140px' }">
-				<div
-					:style="{ width: '140px', float: 'left' }"
-					v-for="i in team2List"
-					:key="i.participantId"
-				>
-					<div class="championBox">
-						<img
-							class="spell"
-							:style="
-								i.participantId == participantIdentities.participantId
-									? { borderRadius: '100%' }
-									: {}
-							"
-							:src="getChampIcon + championInfo(i.championId).id + '.png'"
-						/>
-					</div>
-					<div>{{ i.player.summonerName | textCut(6) }}</div>
-				</div>
-			</div>
-		</div>
+		<game-detail />
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import GameDetail from './GameDetail.vue'
 
 export default {
+	components: { GameDetail },
 	data() {
 		return {
 			grayFont: { color: 'gray' },
