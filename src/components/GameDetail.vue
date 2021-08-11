@@ -1,20 +1,20 @@
 <template>
-	<div :style="{ padding: '10px' }">
+	<div :style="{ padding: '0 30px 0 30px' }">
 		<table class="gameDetail">
 			<thead>
 				<tr>
-					<th colspan="4" class="head">패배(레드팀)</th>
+					<th class="head text-left">패배(레드팀)</th>
 					<th class="head">티어</th>
 					<th class="head">KDA</th>
 					<th class="head">피해량</th>
 					<th class="head">시야점수</th>
 					<th class="head">CS</th>
-					<th class="head">아이템</th>
+					<th class="head text-left">아이템</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="bodyRow" v-for="i in 5" :key="i">
-					<td>
+					<td class="firstCell">
 						<div class="portraitCell">
 							<img
 								class="portrait"
@@ -22,8 +22,6 @@
 							/>
 							<div class="level">12</div>
 						</div>
-					</td>
-					<td>
 						<div class="spellCell">
 							<img
 								class="spell"
@@ -34,8 +32,6 @@
 								src="https://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/SummonerFlash.png"
 							/>
 						</div>
-					</td>
-					<td>
 						<div class="luneCell">
 							<img
 								class="lune"
@@ -46,10 +42,9 @@
 								src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png"
 							/>
 						</div>
-					</td>
-					<td>
 						<div>하이하이</div>
 					</td>
+
 					<td class="cell">Silver 3</td>
 					<td class="cell">
 						<div class="kdaText1">0.24:1</div>
@@ -65,11 +60,17 @@
 						<div>1515151</div>
 					</td>
 					<td class="cell">
-						<div>1515151</div>
+						<div v-for="k in 7" :key="k" class="items">
+							<img
+								class="item"
+								src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png"
+							/>
+						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<div>비교할곳</div>
 	</div>
 </template>
 
@@ -83,11 +84,17 @@ export default {
 
 <style>
 .gameDetail {
-	padding: 10px;
+	width: 100%;
 	border-collapse: collapse;
 }
 .gameDetail .bodyRow {
 	background: thistle;
+}
+.gameDetail .bodyRow .firstCell {
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+	padding: 10px;
 }
 .gameDetail .head {
 	padding: 5px 30px 10px 30px;
@@ -100,10 +107,8 @@ export default {
 	height: 40px;
 	width: 40px;
 	border-radius: 100%;
-	margin-left: 10px;
 }
 .gameDetail .portraitCell .level {
-	margin-left: 10px;
 	border-radius: 100%;
 	background-color: black;
 	opacity: 0.7;
@@ -118,21 +123,21 @@ export default {
 .gameDetail .spellCell {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 }
 .gameDetail .spellCell .spell {
 	height: 20px;
 	width: 20px;
+	margin: 1px;
 }
 .gameDetail .luneCell {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 }
 
 .gameDetail .luneCell .lune {
 	height: 20px;
 	width: 20px;
+	margin: 1px;
 }
 .gameDetail .cell {
 	text-align: center;
@@ -143,5 +148,16 @@ export default {
 	font-weight: bold;
 }
 .gameDetail .cell .kdaText2 {
+}
+
+.gameDetail .cell .items {
+	display: flex;
+	float: left;
+}
+
+.gameDetail .cell .items .item {
+	height: 25px;
+	width: 25px;
+	margin: 1px;
 }
 </style>
