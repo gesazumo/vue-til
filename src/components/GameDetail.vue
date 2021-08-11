@@ -160,6 +160,7 @@ export default {
 	margin-top: 1px;
 	border: 1px solid;
 	border-color: rgb(206, 167, 167);
+	background-color: whitesmoke;
 }
 .gameDetail {
 	width: 100%;
