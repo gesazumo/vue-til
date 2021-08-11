@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="game" :style="gameResultStyle">
+		<div class="game" :style="[gameResultStyle, plusButtonStyle]">
 			<div class="gameStats">
 				<div class="font-weight-bold" :style="grayFont">
 					{{ getQueues(gameObject.queue).description }}
@@ -181,8 +181,14 @@
 					</div>
 				</div>
 			</div>
+			<div>
+				<button @click="showDetail" class="plusButton">
+					<v-icon v-if="showDetailFlag"> mdi-minus </v-icon>
+					<v-icon v-else> mdi-plus </v-icon>
+				</button>
+			</div>
 		</div>
-		<game-detail />
+		<game-detail v-if="showDetailFlag" />
 	</div>
 </template>
 
@@ -197,6 +203,7 @@ export default {
 			grayFont: { color: 'gray' },
 			winFont: { color: '#1a78ae' },
 			loseFont: { color: '#c6443e' },
+			showDetailFlag: false,
 		}
 	},
 	props: {
@@ -207,6 +214,9 @@ export default {
 		},
 	},
 	methods: {
+		showDetail() {
+			this.showDetailFlag = !this.showDetailFlag
+		},
 		timeForToday(value) {
 			const today = new Date()
 			const timeValue = new Date(value)
@@ -281,6 +291,9 @@ export default {
 						borderColor: '#cea7a7',
 				  }
 		},
+		plusButtonStyle() {
+			return this.showDetailFlag ? {} : { marginBottom: '10px' }
+		},
 		multiKill() {
 			if (this.participant.stats.pentaKills > 0) return 5
 			else if (this.participant.stats.quadraKills > 0) return 4
@@ -318,7 +331,6 @@ export default {
 .game {
 	display: flex;
 	align-items: center;
-	margin: 10px;
 }
 .game .gameStats {
 	min-width: 250px;
@@ -341,7 +353,7 @@ export default {
 	text-align: center;
 }
 .game .champions {
-	padding: 10px 30px 10px 30px;
+	padding: 10px 30px 10px 0px;
 	display: flex;
 }
 .game .score .kda .death {
@@ -386,5 +398,11 @@ export default {
 	width: 25px;
 	height: 25px;
 	padding: 1px;
+}
+.plusButton {
+	background-color: snow;
+	border-radius: 100%;
+	width: 35px;
+	height: 35px;
 }
 </style>
