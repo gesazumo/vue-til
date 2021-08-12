@@ -27,7 +27,10 @@ eslint 설정
 .eslintrc.js -> prettier/prettier 
 ```
 
-## 실행방법
+
+
+## 참고
 ```
-Git Clone -> npm install -> npm run serve
+이 프로젝트를 실행하려면 
+https://github.com/gesazumo/lol-server 를 먼저 로컬에서 띄워야함
 ```
