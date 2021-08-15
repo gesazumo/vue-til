@@ -7,7 +7,7 @@
 					<th class="head">티어</th>
 					<th class="head">KDA</th>
 					<th class="head">피해량</th>
-					<th class="head">시야점수</th>
+					<th class="head">와드</th>
 					<th class="head">CS</th>
 					<th class="head text-left">아이템</th>
 				</tr>
@@ -17,6 +17,11 @@
 					class="bodyRow"
 					v-for="team1 in team1List"
 					:key="team1.player.accountId"
+					:style="
+						team1.stats.win
+							? { background: '#e9e0e0' }
+							: { background: '#e9e0e0' }
+					"
 				>
 					<td class="firstCell">
 						<div class="portraitCell">
@@ -67,7 +72,14 @@
 
 					<td class="cell">Silver 3</td>
 					<td class="cell">
-						<div class="kdaText1">0.24:1</div>
+						<div class="kdaText1">
+							{{
+								(
+									(team1.stats.kills + team1.stats.assists) /
+									team1.stats.deaths
+								).toFixed(2)
+							}}:1
+						</div>
 						<div class="kdaText2">
 							<span
 								>{{ team1.stats.kills }}/{{ team1.stats.deaths }}/{{
@@ -90,10 +102,36 @@
 						/>
 					</td>
 					<td class="cell">
-						<div>1515151</div>
+						<div>
+							<v-tooltip top>
+								<template v-slot:activator="{ on, attrs }">
+									<div v-bind="attrs" v-on="on">
+										<div>
+											{{ team1.stats.visionWardsBoughtInGame | nullToZero }}
+										</div>
+										<div>
+											{{ team1.stats.wardsPlaced | nullToZero }} /
+											{{ team1.stats.wardsKilled | nullToZero }}
+										</div>
+									</div>
+								</template>
+								<div>
+									<div>
+										제어와드 :
+										{{ team1.stats.visionWardsBoughtInGame | nullToZero }}
+									</div>
+									<div>
+										와드설치 : {{ team1.stats.wardsPlaced | nullToZero }}
+									</div>
+									<div>
+										와드제거 : {{ team1.stats.wardsKilled | nullToZero }}
+									</div>
+								</div>
+							</v-tooltip>
+						</div>
 					</td>
 					<td class="cell">
-						<div>1515151</div>
+						<div>{{ team1.stats.totalMinionsKilled }}</div>
 					</td>
 					<td class="cell">
 						<div v-for="k in 7" :key="k" class="items">

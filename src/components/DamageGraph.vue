@@ -1,10 +1,20 @@
 <template>
-	<div class="damageGraph">
-		<div class="text">{{ damage }}</div>
-		<div class="outBox">
-			<div class="inBox" :style="{ width: damagePerTotal }" />
+	<v-tooltip top>
+		<template v-slot:activator="{ on, attrs }">
+			<div v-bind="attrs" v-on="on">
+				<div class="damageGraph">
+					<div class="text">{{ damage | comma }}</div>
+					<div class="outBox">
+						<div class="inBox" :style="{ width: damagePerTotal }" />
+					</div>
+				</div>
+			</div>
+		</template>
+		<div>
+			<div>챔피언에게 가한 피해량 : {{ damage | comma }}</div>
+			<div>총 피해량 : {{ totalDamage | comma }}</div>
 		</div>
-	</div>
+	</v-tooltip>
 </template>
 
 <script>
