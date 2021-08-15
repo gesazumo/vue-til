@@ -152,7 +152,12 @@
 				</tr>
 			</tbody>
 		</table>
-		<team-detail />
+		<team-detail
+			:team1Info="team1Info"
+			:team2Info="team2Info"
+			:totalKills="{ team1TotalKill, team2TotalKill }"
+			:totalGold="{ team1TotalGold, team2TotalGold }"
+		/>
 		<table class="gameDetail">
 			<thead>
 				<tr>
@@ -241,8 +246,17 @@ export default {
 				.map(team1 => {
 					return team1.stats.kills
 				})
-				.reduce((acc, crrentKill) => {
-					return acc + crrentKill
+				.reduce((acc, currentKill) => {
+					return acc + currentKill
+				})
+		},
+		team1TotalGold() {
+			return this.team1List
+				.map(team1 => {
+					return team1.stats.goldEarned
+				})
+				.reduce((acc, currentGold) => {
+					return acc + currentGold
 				})
 		},
 		team2TotalKill() {
@@ -250,8 +264,17 @@ export default {
 				.map(team2 => {
 					return team2.stats.kills
 				})
-				.reduce((acc, crrentKill) => {
-					return acc + crrentKill
+				.reduce((acc, currentKill) => {
+					return acc + currentKill
+				})
+		},
+		team2TotalGold() {
+			return this.team2List
+				.map(team2 => {
+					return team2.stats.goldEarned
+				})
+				.reduce((acc, currentGold) => {
+					return acc + currentGold
 				})
 		},
 		maxDamageInTeam1() {

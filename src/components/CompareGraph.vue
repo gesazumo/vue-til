@@ -2,13 +2,13 @@
 	<div class="compareGraph">
 		<span class="graphTitle">{{ title }}</span>
 		<span class="graphValue" :style="{ textAlign: 'right' }">{{
-			leftValue
+			leftValue | comma
 		}}</span>
 		<div :style="{ width: '250px', display: 'flex' }">
-			<div class="leftBox" />
-			<div class="rightBox" />
+			<div class="leftBox" :style="{ width: `${leftBoxWidth}%` }" />
+			<div class="rightBox" :style="{ width: `${rightBoxWidth}%` }" />
 		</div>
-		<span class="graphValue">{{ rightValue }}</span>
+		<span class="graphValue">{{ rightValue | comma }}</span>
 	</div>
 </template>
 
@@ -25,6 +25,13 @@ export default {
 		rightValue: {
 			type: Number,
 		},
+	},
+	data() {
+		return {
+			leftBoxWidth: (this.leftValue / (this.leftValue + this.rightValue)) * 100,
+			rightBoxWidth:
+				(this.rightValue / (this.leftValue + this.rightValue)) * 100,
+		}
 	},
 }
 </script>
@@ -47,18 +54,17 @@ export default {
 .compareGraph .graphValue {
 	font-size: 12px;
 	width: 50px;
+	margin: 0 5px 0 5px;
 }
 
 .compareGraph .leftBox {
 	height: 13px;
-	width: 30%;
 	background-color: #c6443e;
 	/* margin-right: 5px; */
 }
 
 .compareGraph .rightBox {
 	height: 13px;
-	width: 70%;
 	background-color: steelblue;
 	/* margin-left: 5px; */
 }
