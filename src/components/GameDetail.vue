@@ -3,7 +3,11 @@
 		<table class="gameDetail">
 			<thead>
 				<tr>
-					<th class="head text-left">패배(레드팀)</th>
+					<th class="head text-left">
+						{{ team1Info.win == 'Win' ? '승리' : '패배' }}({{
+							this.$getTeamName(team1Info.teamId)
+						}})
+					</th>
 					<th class="head">티어</th>
 					<th class="head">KDA</th>
 					<th class="head">피해량</th>
@@ -17,11 +21,7 @@
 					class="bodyRow"
 					v-for="team1 in team1List"
 					:key="team1.player.accountId"
-					:style="
-						team1.stats.win
-							? { background: '#e9e0e0' }
-							: { background: '#e9e0e0' }
-					"
+					:style="team1.stats.win ? winTeamStyle : loseTeamStyle"
 				>
 					<td class="firstCell">
 						<div class="portraitCell">
@@ -134,11 +134,19 @@
 						<div>{{ team1.stats.totalMinionsKilled }}</div>
 					</td>
 					<td class="cell">
-						<div v-for="k in 7" :key="k" class="items">
-							<img
-								class="item"
-								src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png"
-							/>
+						<div v-for="(n, index) in 7" :key="index" class="items">
+							<item-tool-tip
+								:itemId="team1.stats['item' + index]"
+								v-if="team1.stats['item' + index] != 0"
+							>
+								<template v-slot:temp>
+									<img
+										class="item"
+										:src="getItemIcon + team1.stats['item' + index] + '.png'"
+									/>
+								</template>
+							</item-tool-tip>
+							<div class="item" v-if="team1.stats['item' + index] == 0"></div>
 						</div>
 					</td>
 				</tr>
@@ -227,6 +235,7 @@ export default {
 	name: 'GameDetail',
 	computed: {
 		...mapGetters(['championInfo', 'spellInfo']),
+		...mapGetters('findStore', ['getSummonerId']),
 		team1TotalKill() {
 			return this.team1List
 				.map(team1 => {
@@ -278,7 +287,6 @@ export default {
 
 <style>
 .gameDetailBox {
-	padding: 0 30px 0 30px;
 	margin-bottom: 5px;
 	margin-top: 1px;
 	border: 1px solid;
@@ -286,6 +294,7 @@ export default {
 	background-color: whitesmoke;
 }
 .gameDetail {
+	color: '#555e5e';
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -357,6 +366,8 @@ export default {
 }
 
 .gameDetail .cell .items .item {
+	border-radius: 15%;
+	background-color: dimgray;
 	height: 25px;
 	width: 25px;
 	margin: 1px;

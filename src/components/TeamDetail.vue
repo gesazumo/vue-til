@@ -1,8 +1,8 @@
 <template>
 	<div class="teamDetail">
 		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
+		<div><img class="objectIcon" src="@/assets/icon-dragon-r.png" />0</div>
+		<div><img class="objectIcon" src="@/assets/icon-tower-r.png" />0</div>
 		<div class="graphArea">
 			<compare-graph
 				:title="'TotalKill'"
@@ -12,8 +12,8 @@
 			<compare-graph :title="'ToTalGold'" :leftValue="20" :rightValue="50" />
 		</div>
 		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
+		<div><img class="objectIcon" src="@/assets/icon-dragon-b.png" />0</div>
+		<div><img class="objectIcon" src="@/assets/icon-tower-b.png" />0</div>
 	</div>
 </template>
 

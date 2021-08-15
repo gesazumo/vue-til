@@ -1,4 +1,4 @@
-import { staticImageAPI, staticURL } from '@/assets/constant'
+import { staticImageAPI, staticURL, teamName } from '@/assets/constant'
 
 const util = {
 	$getSummonerIcon(key) {
@@ -29,6 +29,10 @@ const util = {
 		if (typeof num != 'number') return 0
 		const val = 10 ** (num.toString().length - 2)
 		return Math.ceil(num / val) * val
+	},
+
+	$getTeamName(value) {
+		return teamName[value]
 	},
 }
 
