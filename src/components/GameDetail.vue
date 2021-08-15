@@ -13,24 +13,44 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="bodyRow" v-for="i in 5" :key="i">
+				<tr
+					class="bodyRow"
+					v-for="team1 in team1List"
+					:key="team1.player.accountId"
+				>
 					<td class="firstCell">
 						<div class="portraitCell">
 							<img
 								class="portrait"
-								src="https://ddragon.leagueoflegends.com/cdn/11.15.1/img/champion/Teemo.png"
+								:src="getChampIcon + championInfo(team1.championId).id + '.png'"
 							/>
-							<div class="level">12</div>
+							<div class="level">{{ team1.stats.champLevel }}</div>
 						</div>
 						<div class="spellCell">
-							<img
-								class="spell"
-								src="https://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/SummonerFlash.png"
-							/>
-							<img
-								class="spell"
-								src="https://ddragon.leagueoflegends.com/cdn/11.15.1/img/spell/SummonerFlash.png"
-							/>
+							<spell-tool-tip :spellId="team1.spell1Id">
+								<template v-slot:temp>
+									<div :style="{ width: '20px', height: '20px' }">
+										<img
+											class="spell"
+											:src="
+												getSpellIcon + spellInfo(team1.spell1Id).id + '.png'
+											"
+										/>
+									</div>
+								</template>
+							</spell-tool-tip>
+							<spell-tool-tip :spellId="team1.spell2Id">
+								<template v-slot:temp>
+									<div :style="{ width: '20px', height: '20px' }">
+										<img
+											class="spell"
+											:src="
+												getSpellIcon + spellInfo(team1.spell2Id).id + '.png'
+											"
+										/>
+									</div>
+								</template>
+							</spell-tool-tip>
 						</div>
 						<div class="luneCell">
 							<img
@@ -42,16 +62,32 @@
 								src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png"
 							/>
 						</div>
-						<div>하이하이</div>
+						<div>{{ team1.player.summonerName }}</div>
 					</td>
 
 					<td class="cell">Silver 3</td>
 					<td class="cell">
 						<div class="kdaText1">0.24:1</div>
-						<div class="kdaText2">0/21/5(13%)</div>
+						<div class="kdaText2">
+							<span
+								>{{ team1.stats.kills }}/{{ team1.stats.deaths }}/{{
+									team1.stats.assists
+								}}</span
+							>
+							({{
+								(
+									((team1.stats.kills + team1.stats.assists) / team1TotalKill) *
+									100
+								).toFixed(0)
+							}}%)
+						</div>
 					</td>
 					<td class="cell">
-						<damage-graph />
+						<damage-graph
+							:damage="team1.stats.totalDamageDealtToChampions"
+							:totalDamage="team1.stats.totalDamageDealt"
+							:maxDamageInTeam="maxDamageInTeam1"
+						/>
 					</td>
 					<td class="cell">
 						<div>1515151</div>
@@ -113,7 +149,7 @@
 								src="https://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/Ahri.png"
 							/>
 						</div>
-						<div>하이하이</div>
+						<div>{{ team1TotalKill }}</div>
 					</td>
 
 					<td class="cell">Silver 3</td>
@@ -147,9 +183,58 @@
 <script>
 import DamageGraph from '@/components/DamageGraph.vue'
 import TeamDetail from '@/components/TeamDetail.vue'
+import { mapGetters } from 'vuex'
 export default {
 	components: { DamageGraph, TeamDetail },
 	name: 'GameDetail',
+	computed: {
+		...mapGetters(['championInfo', 'spellInfo']),
+		team1TotalKill() {
+			return this.team1List
+				.map(team1 => {
+					return team1.stats.kills
+				})
+				.reduce((acc, crrentKill) => {
+					return acc + crrentKill
+				})
+		},
+		team2TotalKill() {
+			return this.team2List
+				.map(team2 => {
+					return team2.stats.kills
+				})
+				.reduce((acc, crrentKill) => {
+					return acc + crrentKill
+				})
+		},
+		maxDamageInTeam1() {
+			return this.team1List
+				.map(team1 => {
+					return team1.stats.totalDamageDealtToChampions
+				})
+				.reduce((acc, currentDamage) => {
+					return acc > currentDamage ? acc : currentDamage
+				})
+		},
+	},
+	props: {
+		team1List: {
+			type: Array,
+			required: true,
+		},
+		team2List: {
+			type: Array,
+			required: true,
+		},
+		team1Info: {
+			type: Object,
+			required: true,
+		},
+		team2Info: {
+			type: Object,
+			required: true,
+		},
+	},
 }
 </script>
 
@@ -204,9 +289,9 @@ export default {
 	flex-direction: column;
 }
 .gameDetail .spellCell .spell {
-	height: 20px;
-	width: 20px;
-	margin: 1px;
+	height: 100%;
+	width: 100%;
+	padding: 1px;
 }
 .gameDetail .luneCell {
 	display: flex;
@@ -216,7 +301,7 @@ export default {
 .gameDetail .luneCell .lune {
 	height: 20px;
 	width: 20px;
-	margin: 1px;
+	padding: 1px;
 }
 .gameDetail .cell {
 	text-align: center;

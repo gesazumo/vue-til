@@ -24,6 +24,12 @@ const util = {
 	$getItemInfo(id) {
 		return this.$store.getters.itemInfo(id)
 	},
+
+	$getUpNearNumber(num) {
+		if (typeof num != 'number') return 0
+		const val = 10 ** (num.toString().length - 2)
+		return Math.ceil(num / val) * val
+	},
 }
 
 export default util

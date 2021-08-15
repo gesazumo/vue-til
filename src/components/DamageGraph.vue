@@ -1,6 +1,6 @@
 <template>
 	<div class="damageGraph">
-		<div class="text">{{ this.damage }}</div>
+		<div class="text">{{ damage }}</div>
 		<div class="outBox">
 			<div class="inBox" :style="{ width: damagePerTotal }" />
 		</div>
@@ -13,16 +13,22 @@ export default {
 	props: {
 		totalDamage: {
 			type: Number,
-			default: 100,
+			required: true,
 		},
 		damage: {
 			type: Number,
-			default: 50,
+			required: true,
+		},
+		maxDamageInTeam: {
+			type: Number,
+			required: true,
 		},
 	},
 	computed: {
 		damagePerTotal() {
-			return `${(this.damage * 100) / this.totalDamage}%`
+			return `${
+				(this.damage * 100) / this.$getUpNearNumber(this.maxDamageInTeam)
+			}%`
 		},
 	},
 }
