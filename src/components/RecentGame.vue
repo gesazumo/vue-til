@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<div>검색탭 넣기!!!</div>
 		<div>
 			<recent-game-analysis />
 		</div>
