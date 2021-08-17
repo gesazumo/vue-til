@@ -2,6 +2,7 @@
 	<div>
 		<div>검색탭 넣기!!!</div>
 		<div>
+			<!-- 승/패, 전체킬/댓/어시 20게임중 탑 3(많이한거) 랭킹 챔피언 평균 -->
 			<recent-game-analysis />
 		</div>
 
@@ -33,6 +34,7 @@ export default {
 	},
 	computed: {
 		...mapGetters('findStore', ['getSummonerAccountId']),
+		// donutGrahpData() {},
 	},
 	watch: {
 		getSummonerAccountId() {

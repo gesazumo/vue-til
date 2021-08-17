@@ -2,11 +2,18 @@
 	<div class="recnetGameAnaly">
 		<div :style="{ width: '30vw', display: 'flex' }">
 			<div>
-				<span class="title">20전 13승 7패</span>
+				<span class="title"
+					>5전 {{ recentGameSummary.win }}승
+					{{ recentGameSummary.lose }}패</span
+				>
 				<donut-chart />
 			</div>
 			<div class="section2">
-				<div class="row1">3.3 / <span class="higtlight">7.3</span> / 8.4</div>
+				<div class="row1">
+					{{ recentGameSummary.killAvg }} /
+					<span class="higtlight">{{ recentGameSummary.deathAvg }}</span> /
+					{{ recentGameSummary.assistAvg }}
+				</div>
 				<div class="row2">1.50:1 <span class="higtlight">(41%)</span></div>
 			</div>
 		</div>
@@ -45,8 +52,32 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { fetchFindRecentGameSummary } from '../api/find'
 export default {
 	name: 'recentGameAnalysis',
+	computed: {
+		...mapGetters('findStore', ['getSummonerAccountId']),
+	},
+	data() {
+		return {
+			recentGameSummary: {},
+		}
+	},
+	watch: {
+		getSummonerAccountId() {
+			this.recentGameSummary = null
+			this.getRecentGameSummary()
+		},
+	},
+	methods: {
+		async getRecentGameSummary() {
+			const summonerId = this.getSummonerAccountId
+
+			const { data } = await fetchFindRecentGameSummary(summonerId)
+			this.recentGameSummary = data
+		},
+	},
 }
 </script>
 
