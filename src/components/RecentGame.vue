@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<div>
+			<recent-game-analysis />
+		</div>
+
 		<div v-for="game in recentGameList" :key="game.gameId">
 			<game :gameObject="game" />
 		</div>
@@ -15,8 +19,10 @@ import { mapGetters } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
 import { fetchFindRecentGame } from '../api/find'
 import Game from './Game.vue'
+import RecentGameAnalysis from './RecentGameAnalysis.vue'
+
 export default {
-	components: { Game, InfiniteLoading },
+	components: { Game, InfiniteLoading, RecentGameAnalysis },
 	data() {
 		return {
 			beginIndex: 0,
