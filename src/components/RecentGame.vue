@@ -1,19 +1,19 @@
 <template>
 	<div>
 		<div>검색탭 넣기!!!</div>
-		<div>
+		<!-- <div>
 			<template v-if="showAnalysisFlag">
 				<button class="analyButton" @click="showAnalysis">
 					<span class="analyHideText">분석결과 감추기</span>
 				</button>
-				<recent-game-analysis />
 			</template>
 			<template v-else>
 				<button class="analyButton" @click="showAnalysis">
 					<span class="analyText">최근 20게임 분석결과 확인하기</span>
 				</button>
 			</template>
-		</div>
+		</div> -->
+		<recent-game-analysis />
 
 		<div v-for="game in recentGameList" :key="game.gameId">
 			<game :gameObject="game" />

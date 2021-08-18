@@ -91,15 +91,24 @@ export default {
 	name: 'recentGameAnalysis',
 	computed: {
 		...mapGetters('findStore', ['getSummonerAccountId']),
+		recentMostList() {
+			const arr = []
+			this.recentGameSummary.gameList.forEach(game => {
+				arr.push(game.championId)
+			})
+			return 1
+		},
 	},
 	data() {
 		return {
 			recentGameSummary: {},
 		}
 	},
-	mounted() {
-		this.recentGameSummary = null
-		this.getRecentGameSummary()
+	watch: {
+		getSummonerAccountId() {
+			this.recentGameSummary = null
+			this.getRecentGameSummary()
+		},
 	},
 
 	methods: {
