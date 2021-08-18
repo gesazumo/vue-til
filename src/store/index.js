@@ -6,6 +6,7 @@ import {
 	SET_LOADING,
 	SET_SPELL_LIST,
 	SET_ITEM_LIST,
+	SHOW_CONFIRM_MODAL,
 } from './mutation-type'
 
 Vue.use(Vuex)
@@ -22,6 +23,7 @@ export default new Vuex.Store({
 		spellList: {},
 		itemList: {},
 		loading: false,
+		showConfirmModal: false,
 	},
 	getters: {
 		championInfo: state => key => {
@@ -54,6 +56,9 @@ export default new Vuex.Store({
 		},
 		[SET_ITEM_LIST](state, { itemList }) {
 			state.itemList = itemList
+		},
+		[SHOW_CONFIRM_MODAL](state) {
+			state.showConfirmModal = true
 		},
 	},
 
