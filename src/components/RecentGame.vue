@@ -2,8 +2,17 @@
 	<div>
 		<div>검색탭 넣기!!!</div>
 		<div>
-			<!-- 승/패, 전체킬/댓/어시 20게임중 탑 3(많이한거) 랭킹 챔피언 평균 -->
-			<recent-game-analysis />
+			<template v-if="showAnalysisFlag">
+				<button class="analyButton" @click="showAnalysis">
+					<span class="analyHideText">분석결과 감추기</span>
+				</button>
+				<recent-game-analysis />
+			</template>
+			<template v-else>
+				<button class="analyButton" @click="showAnalysis">
+					<span class="analyText">최근 20게임 분석결과 확인하기</span>
+				</button>
+			</template>
 		</div>
 
 		<div v-for="game in recentGameList" :key="game.gameId">
@@ -30,6 +39,7 @@ export default {
 			beginIndex: 0,
 			endIndex: 10,
 			recentGameList: [],
+			showAnalysisFlag: false,
 		}
 	},
 	computed: {
@@ -69,8 +79,28 @@ export default {
 				},
 			)
 		},
+		showAnalysis() {
+			this.showAnalysisFlag = !this.showAnalysisFlag
+		},
 	},
 }
 </script>
 
-<style></style>
+<style>
+.analyButton {
+	width: 100%;
+	text-align: center;
+	padding: 15px;
+	background-color: ghostwhite;
+	border: 0.1px solid;
+	border-color: gray;
+	margin: 5px 0 5px 0;
+}
+.analyButton .analyText {
+	font-size: 1rem;
+}
+
+.analyButton .analyHideText {
+	font-size: 1rem;
+}
+</style>

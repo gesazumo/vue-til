@@ -1,12 +1,17 @@
 <template>
-	<div class="recnetGameAnaly">
+	<div class="recnetGameAnaly" v-if="recentGameSummary">
 		<div :style="{ width: '30vw', display: 'flex' }">
 			<div>
 				<span class="title"
 					>5전 {{ recentGameSummary.win }}승
 					{{ recentGameSummary.lose }}패</span
 				>
-				<donut-chart />
+				<donut-chart
+					:chartData="[
+						{ title: '승리', count: recentGameSummary.win, color: '#EE5A52' },
+						{ title: '패배', count: recentGameSummary.lose, color: '#1F8ECD' },
+					]"
+				/>
 			</div>
 			<div class="section2">
 				<div class="row1">
@@ -64,12 +69,11 @@ export default {
 			recentGameSummary: {},
 		}
 	},
-	watch: {
-		getSummonerAccountId() {
-			this.recentGameSummary = null
-			this.getRecentGameSummary()
-		},
+	mounted() {
+		this.recentGameSummary = null
+		this.getRecentGameSummary()
 	},
+
 	methods: {
 		async getRecentGameSummary() {
 			const summonerId = this.getSummonerAccountId

@@ -1,8 +1,5 @@
 <template>
-	<div :style="{ position: 'relative' }">
-		<div ref="chartdiv" class="donutChart"></div>
-		<div class="centerText">25%</div>
-	</div>
+	<div ref="chartdiv" class="donutChart" />
 </template>
 
 <script>
@@ -11,32 +8,41 @@ import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 am4core.useTheme(am4themes_animated)
-let localChart = null
+let chart = null
 export default {
 	name: 'DonutChart',
+	props: {
+		chartData: {
+			type: Array,
+			required: true,
+		},
+	},
+	watch: {
+		chartData() {
+			if (this.chart) this.chart.invalidateRawData()
+		},
+	},
+	computed: {
+		winRate() {
+			return (
+				(this.chartData[0].count /
+					(this.chartData[0].count + this.chartData[1].count)) *
+				100
+			)
+		},
+	},
 	mounted() {
-		let chart = am4core.create(this.$refs.chartdiv, am4charts.PieChart)
+		chart = am4core.create(this.$refs.chartdiv, am4charts.PieChart)
 
 		chart.padding = 80
 
-		chart.data = [
-			{
-				country: '승리',
-				litres: 15,
-				color: '#EE5A52',
-			},
-			{
-				country: '패배',
-				litres: 8,
-				color: '#1F8ECD',
-			},
-		]
+		chart.data = this.chartData
 
 		chart.innerRadius = am4core.percent(65)
 
 		var pieSeries = chart.series.push(new am4charts.PieSeries())
-		pieSeries.dataFields.value = 'litres'
-		pieSeries.dataFields.category = 'country'
+		pieSeries.dataFields.value = 'count'
+		pieSeries.dataFields.category = 'title'
 
 		// pieSeries.slices.template.tooltipText = '{country}'
 		pieSeries.slices.template.propertyFields.fill = 'color'
@@ -46,16 +52,20 @@ export default {
 		pieSeries.ticks.template.disabled = true
 		pieSeries.labels.template.disabled = true
 
+		let label = pieSeries.createChild(am4core.Label)
+		label.text = this.winRate + '%'
+		label.horizontalCenter = 'middle'
+		label.verticalCenter = 'middle'
+		label.fontSize = 15
+
 		// pieSeries.hiddenState.properties.opacity = 1
 		// pieSeries.hiddenState.properties.endAngle = -90
 		// pieSeries.hiddenState.properties.startAngle = -90
-
-		localChart = chart
 	},
 
 	beforeDestroy() {
-		if (localChart) {
-			localChart.dispose()
+		if (chart) {
+			chart.dispose()
 		}
 	},
 }
@@ -65,10 +75,5 @@ export default {
 .donutChart {
 	width: 10vw;
 	height: 10vw;
-}
-.centerText {
-	position: absolute;
-	top: 4.5vw;
-	left: 4.5vw;
 }
 </style>
