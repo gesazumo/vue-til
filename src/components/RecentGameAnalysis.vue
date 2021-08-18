@@ -3,23 +3,51 @@
 		<div :style="{ width: '30vw', display: 'flex' }">
 			<div>
 				<span class="title"
-					>5전 {{ recentGameSummary.win }}승
-					{{ recentGameSummary.lose }}패</span
+					>5전 {{ recentGameSummary.totalWin }}승
+					{{ recentGameSummary.totalLose }}패</span
 				>
 				<donut-chart
 					:chartData="[
-						{ title: '승리', count: recentGameSummary.win, color: '#EE5A52' },
-						{ title: '패배', count: recentGameSummary.lose, color: '#1F8ECD' },
+						{
+							title: '승리',
+							count: recentGameSummary.totalWin,
+							color: '#EE5A52',
+						},
+						{
+							title: '패배',
+							count: recentGameSummary.totalLose,
+							color: '#1F8ECD',
+						},
 					]"
 				/>
 			</div>
 			<div class="section2">
 				<div class="row1">
-					{{ recentGameSummary.killAvg }} /
-					<span class="higtlight">{{ recentGameSummary.deathAvg }}</span> /
-					{{ recentGameSummary.assistAvg }}
+					{{ recentGameSummary.totalKills / recentGameSummary.avrCount }} /
+					<span class="higtlight">{{
+						recentGameSummary.totalDeaths / recentGameSummary.avrCount
+					}}</span>
+					/
+					{{ recentGameSummary.totalAssists / recentGameSummary.avrCount }}
 				</div>
-				<div class="row2">1.50:1 <span class="higtlight">(41%)</span></div>
+				<div class="row2">
+					{{
+						(
+							(recentGameSummary.totalKills + recentGameSummary.totalAssists) /
+							recentGameSummary.totalDeaths
+						).toFixed(2)
+					}}:1
+					<span class="higtlight"
+						>({{
+							(
+								((recentGameSummary.totalKills +
+									recentGameSummary.totalAssists) /
+									recentGameSummary.teamTotalKills) *
+								100
+							).toFixed(0)
+						}}%)</span
+					>
+				</div>
 			</div>
 		</div>
 		<div class="section3">
