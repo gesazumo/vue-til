@@ -37,7 +37,9 @@ const util = {
 	},
 
 	$showConfirmModal() {
-		this.$store.commit(SHOW_CONFIRM_MODAL)
+		return new Promise(resolve => {
+			this.$store.commit(SHOW_CONFIRM_MODAL, resolve)
+		})
 	},
 }
 
