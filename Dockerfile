@@ -5,7 +5,7 @@ ENV PORT=3000
 
 RUN npm install --production
 COPY . .
-RUN npm run build
+RUN npm run build-production
 
 # production stage
 FROM nginx:stable-alpine as production-stage
