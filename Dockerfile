@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 ENV PORT=3000
 
-RUN npm install --production
+RUN npm install
 COPY . .
 RUN npm run build-production
 
