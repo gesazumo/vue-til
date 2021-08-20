@@ -4,6 +4,7 @@ const url = {
 	find: 'users/find/',
 	info: 'users/info/',
 	recentGame: 'users/recentGames/',
+	summary: 'users/recentGameSummary/',
 	queues: 'queues.json',
 }
 
@@ -19,6 +20,10 @@ export const fetchFindRecentGame = (id, beginIndex, endIndex) => {
 	return instance.get(`${url.recentGame}${id}`, {
 		params: { beginIndex, endIndex },
 	})
+}
+
+export const fetchFindRecentGameSummary = id => {
+	return instance.get(`${url.summary}${id}`)
 }
 
 export const fetchQueues = () => {

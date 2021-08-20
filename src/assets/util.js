@@ -1,4 +1,5 @@
-import { staticImageAPI, staticURL } from '@/assets/constant'
+import { staticImageAPI, staticURL, teamName } from '@/assets/constant'
+import { SHOW_CONFIRM_MODAL } from '../store/mutation-type'
 
 const util = {
 	$getSummonerIcon(key) {
@@ -23,6 +24,22 @@ const util = {
 
 	$getItemInfo(id) {
 		return this.$store.getters.itemInfo(id)
+	},
+
+	$getUpNearNumber(num) {
+		if (typeof num != 'number') return 0
+		const val = 10 ** (num.toString().length - 2)
+		return Math.ceil(num / val) * val
+	},
+
+	$getTeamName(value) {
+		return teamName[value]
+	},
+
+	$showConfirmModal() {
+		return new Promise(resolve => {
+			this.$store.commit(SHOW_CONFIRM_MODAL, resolve)
+		})
 	},
 }
 

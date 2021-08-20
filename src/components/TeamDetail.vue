@@ -1,19 +1,47 @@
 <template>
 	<div class="teamDetail">
-		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-r.png" />0</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-baron-r.png" />{{
+				team1Info.baronKills
+			}}
+		</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-dragon-r.png" />{{
+				team1Info.dragonKills
+			}}
+		</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-tower-r.png" />{{
+				team1Info.towerKills
+			}}
+		</div>
 		<div class="graphArea">
 			<compare-graph
 				:title="'TotalKill'"
-				:leftValue="20000"
-				:rightValue="50000"
+				:leftValue="totalKills.team1TotalKill"
+				:rightValue="totalKills.team2TotalKill"
 			/>
-			<compare-graph :title="'ToTalGold'" :leftValue="20" :rightValue="50" />
+			<compare-graph
+				:title="'ToTalGold'"
+				:leftValue="totalGold.team1TotalGold"
+				:rightValue="totalGold.team2TotalGold"
+			/>
 		</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
-		<div><img class="objectIcon" src="@/assets/icon-baron-b.png" />0</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-baron-b.png" />{{
+				team2Info.baronKills
+			}}
+		</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-dragon-b.png" />{{
+				team2Info.baronKills
+			}}
+		</div>
+		<div>
+			<img class="objectIcon" src="@/assets/icon-tower-b.png" />{{
+				team2Info.baronKills
+			}}
+		</div>
 	</div>
 </template>
 
@@ -23,6 +51,24 @@ import CompareGraph from './CompareGraph.vue'
 export default {
 	name: 'TeamDetail',
 	components: { CompareGraph },
+	props: {
+		team1Info: {
+			type: Object,
+			required: true,
+		},
+		team2Info: {
+			type: Object,
+			required: true,
+		},
+		totalKills: {
+			type: Object,
+			required: true,
+		},
+		totalGold: {
+			type: Object,
+			required: true,
+		},
+	},
 }
 </script>
 

@@ -188,7 +188,13 @@
 				</button>
 			</div>
 		</div>
-		<game-detail v-if="showDetailFlag" />
+		<game-detail
+			v-if="showDetailFlag"
+			:team1Info="gameObject.detail.teams[0]"
+			:team2Info="gameObject.detail.teams[1]"
+			:team1List="team1List"
+			:team2List="team2List"
+		/>
 	</div>
 </template>
 
@@ -209,8 +215,7 @@ export default {
 	props: {
 		gameObject: {
 			type: Object,
-			default: null,
-			require: true,
+			required: true,
 		},
 	},
 	methods: {
