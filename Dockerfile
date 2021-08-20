@@ -1,7 +1,7 @@
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-ENV PORT=3000
+ENV PORT=8080
 
 RUN npm install
 COPY . .
