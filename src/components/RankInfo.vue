@@ -1,7 +1,7 @@
 <template>
 	<div :style="{ marginLeft: '10px' }">
 		<v-card class="mx-auto" width="350" outlined>
-			<v-list-item three-line>
+			<v-list-item three-line v-if="rankInfo">
 				<v-list-item-content>
 					<div>{{ title }}</div>
 					<div v-if="Object.keys(rankInfo).length > 0">

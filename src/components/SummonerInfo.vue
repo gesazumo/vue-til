@@ -23,13 +23,8 @@
 						</v-btn>
 					</v-list-item-subtitle>
 				</v-list-item-content>
-				<template v-if="this.loading">
-					<loading class="mx-auto" width="350" outlined />
-				</template>
-				<template v-if="this.soloRankInfo != null && !this.loading">
-					<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
-					<rank-info :rank-info="flexRankInfo" title="자유랭크" />
-				</template>
+				<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
+				<rank-info :rank-info="flexRankInfo" title="자유랭크" />
 			</v-list-item>
 		</v-card>
 	</div>
@@ -55,7 +50,7 @@ export default {
 		getSummonerId() {
 			this.soloRankInfo = null
 			this.flexRankInfo = null
-			this.fetchData(this.fetchFunction)
+			this.fetchFunction()
 		},
 	},
 	methods: {
