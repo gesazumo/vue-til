@@ -11,6 +11,7 @@ import chartPlugin from '@/plugins/chartPlugin'
 
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import colorPlugin from './plugins/stylePlugin'
+import loadingPlugin from './plugins/loadingPlugin'
 
 Vue.config.productionTip = false
 Object.keys(filters).forEach(key => {
@@ -23,6 +24,7 @@ Vue.use(urlPlugin)
 Vue.use(modalPlugin)
 Vue.use(colorPlugin)
 Vue.use(chartPlugin)
+Vue.use(loadingPlugin)
 
 new Vue({
 	render: h => h(App),
