@@ -31,15 +31,13 @@ export default {
 		}
 	},
 	async created() {
-		try {
-			this.setLoading(true)
+		this.fetchData(this.fetchFunction)
+	},
+	methods: {
+		async fetchFunction() {
 			const { data } = await fetchRotationChampions()
 			this.freeChampionIds = data.freeChampionIds
-		} catch (error) {
-			console.log(error)
-		} finally {
-			this.setLoading(false)
-		}
+		},
 	},
 }
 </script>

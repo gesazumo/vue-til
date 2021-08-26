@@ -23,8 +23,13 @@
 						</v-btn>
 					</v-list-item-subtitle>
 				</v-list-item-content>
-				<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
-				<rank-info :rank-info="flexRankInfo" title="자유랭크" />
+				<template v-if="this.loading">
+					<loading class="mx-auto" width="350" outlined />
+				</template>
+				<template v-if="this.soloRankInfo != null && !this.loading">
+					<rank-info :rank-info="soloRankInfo" title="솔로랭크" />
+					<rank-info :rank-info="flexRankInfo" title="자유랭크" />
+				</template>
 			</v-list-item>
 		</v-card>
 	</div>
@@ -38,8 +43,8 @@ export default {
 	components: { RankInfo },
 	data() {
 		return {
-			soloRankInfo: {},
-			flexRankInfo: {},
+			soloRankInfo: null,
+			flexRankInfo: null,
 		}
 	},
 	computed: {
@@ -48,13 +53,13 @@ export default {
 	},
 	watch: {
 		getSummonerId() {
-			this.soloRankInfo = {}
-			this.flexRankInfo = {}
-			this.getRankInfo()
+			this.soloRankInfo = null
+			this.flexRankInfo = null
+			this.fetchData(this.fetchFunction)
 		},
 	},
 	methods: {
-		async getRankInfo() {
+		async fetchFunction() {
 			const summonerId = this.getSummonerId
 			const { data } = await fetchFindUserRankInfo(summonerId)
 			this.soloRankInfo = data.solo
