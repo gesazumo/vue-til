@@ -336,29 +336,23 @@ export default {
 .game {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
 }
 .game .gameStats {
-	min-width: 250px;
-	padding: 10px 30px 10px 30px;
 }
 .game .champ {
-	padding: 10px 30px 10px 30px;
 }
 .game .score {
-	min-width: 200px;
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .stats {
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .items {
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .champions {
-	padding: 10px 30px 10px 0px;
 	display: flex;
 }
 .game .score .kda .death {
