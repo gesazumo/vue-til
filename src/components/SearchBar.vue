@@ -3,6 +3,7 @@
 		<v-row>
 			<v-col cols="12" md="10">
 				<v-text-field
+					@keyup.enter="doSearch"
 					v-model="summonerName"
 					label="소환사명을 입력하세요"
 					required

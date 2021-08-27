@@ -181,10 +181,10 @@
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="plusSection">
 				<button @click="showDetail" class="plusButton">
-					<v-icon v-if="showDetailFlag"> mdi-minus </v-icon>
-					<v-icon v-else> mdi-plus </v-icon>
+					<v-icon v-if="showDetailFlag"> mdi-chevron-up </v-icon>
+					<v-icon v-else> mdi-chevron-down </v-icon>
 				</button>
 			</div>
 		</div>
@@ -336,29 +336,23 @@ export default {
 .game {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
 }
 .game .gameStats {
-	min-width: 250px;
-	padding: 10px 30px 10px 30px;
 }
 .game .champ {
-	padding: 10px 30px 10px 30px;
 }
 .game .score {
-	min-width: 200px;
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .stats {
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .items {
-	padding: 10px 30px 10px 30px;
 	text-align: center;
 }
 .game .champions {
-	padding: 10px 30px 10px 0px;
 	display: flex;
 }
 .game .score .kda .death {
@@ -404,10 +398,16 @@ export default {
 	height: 25px;
 	padding: 1px;
 }
+.plusSection {
+	position: relative;
+}
 .plusButton {
+	position: absolute;
 	background-color: snow;
 	border-radius: 100%;
 	width: 35px;
 	height: 35px;
+	top: 25px;
+	right: 5px;
 }
 </style>

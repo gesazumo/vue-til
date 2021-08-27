@@ -4,18 +4,18 @@
 			<search-bar />
 			<router-view></router-view>
 		</div>
-		<confirm-modal />
+		<!-- <confirm-modal /> -->
 	</v-app>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar.vue'
 import { mapActions } from 'vuex'
-import ConfirmModal from './components/modal/ConfirmModal.vue'
+// import ConfirmModal from './components/modal/ConfirmModal.vue'
 
 export default {
 	name: 'App',
-	components: { SearchBar, ConfirmModal },
+	components: { SearchBar },
 	data() {
 		return {}
 	},

@@ -14,14 +14,24 @@
 			</template>
 		</div> -->
 		<recent-game-analysis />
-
-		<div v-for="game in recentGameList" :key="game.gameId">
-			<game :gameObject="game" />
-		</div>
-		<infinite-loading
-			@infinite="infiniteHandler"
-			v-if="recentGameList.length > 0"
-		></infinite-loading>
+		<circle-loading
+			v-if="loading"
+			:style="{
+				height: '25vh',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}"
+		/>
+		<template v-else>
+			<div v-for="game in recentGameList" :key="game.gameId">
+				<game :gameObject="game" />
+			</div>
+			<infinite-loading
+				@infinite="infiniteHandler"
+				v-if="recentGameList.length > 0"
+			></infinite-loading>
+		</template>
 	</div>
 </template>
 
@@ -31,9 +41,10 @@ import InfiniteLoading from 'vue-infinite-loading'
 import { fetchFindRecentGame } from '../api/find'
 import Game from './Game.vue'
 import RecentGameAnalysis from './RecentGameAnalysis.vue'
+import CircleLoading from './common/CircleLoading.vue'
 
 export default {
-	components: { Game, InfiniteLoading, RecentGameAnalysis },
+	components: { Game, InfiniteLoading, RecentGameAnalysis, CircleLoading },
 	data() {
 		return {
 			beginIndex: 0,
@@ -51,7 +62,7 @@ export default {
 			this.beginIndex = 0
 			this.endIndex = 10
 			this.recentGameList = []
-			this.getRecentGames()
+			this.fetchData(this.getRecentGames)
 		},
 	},
 	methods: {

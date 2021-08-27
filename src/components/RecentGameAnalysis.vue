@@ -1,9 +1,20 @@
 <template>
-	<div class="recnetGameAnaly" v-if="recentGameSummary">
-		<div :style="{ width: '30vw', display: 'flex' }">
+	<div class="recnetGameAnaly">
+		<circle-loading
+			v-if="!recentGameSummary"
+			:style="{
+				width: '60vw',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '195px',
+			}"
+		/>
+		<div :style="{ width: '30vw', display: 'flex' }" v-if="recentGameSummary">
 			<div>
 				<span class="title"
-					>5전 {{ recentGameSummary.totalWin }}승
+					>{{ recentGameSummary.totalWin + recentGameSummary.totalLose }}전
+					{{ recentGameSummary.totalWin }}승
 					{{ recentGameSummary.totalLose }}패</span
 				>
 				<donut-chart
@@ -50,7 +61,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="section3">
+		<div class="section3" v-if="recentGameSummary">
 			<div v-for="i in 3" :key="i">
 				<div>
 					<div class="row">
@@ -87,7 +98,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import { fetchFindRecentGameSummary } from '../api/find'
+import CircleLoading from './common/CircleLoading.vue'
 export default {
+	components: { CircleLoading },
 	name: 'recentGameAnalysis',
 	computed: {
 		...mapGetters('findStore', ['getSummonerAccountId']),
@@ -101,7 +114,7 @@ export default {
 	},
 	data() {
 		return {
-			recentGameSummary: {},
+			recentGameSummary: null,
 		}
 	},
 	watch: {
@@ -127,6 +140,10 @@ export default {
 	text-align: center;
 	display: flex;
 	color: #666;
+	margin-bottom: 3px;
+	border: 1px solid;
+	border-color: gainsboro;
+	padding: 10px;
 }
 .recnetGameAnaly .title {
 	color: #666;

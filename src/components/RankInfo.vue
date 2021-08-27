@@ -1,14 +1,15 @@
 <template>
 	<div :style="{ marginLeft: '10px' }">
-		<v-card class="mx-auto" width="350" outlined>
-			<v-list-item three-line>
+		<v-card class="mx-auto" width="20vw" outlined :style="{ height: '23vh' }">
+			<blink-loading v-if="!rankInfo" />
+			<v-list-item three-line v-if="rankInfo" :style="{ height: '100%' }">
 				<v-list-item-content>
-					<div>{{ title }}</div>
+					<div :style="{ fontSize: '1rem' }">{{ title }}</div>
 					<div v-if="Object.keys(rankInfo).length > 0">
-						<v-list-item-title class="text-h5 mb-1">
+						<v-list-item-title>
 							{{ rankInfo.tier }} {{ rankInfo.rank }}
 						</v-list-item-title>
-						<div>
+						<div :style="{ fontSize: '0.8rem' }">
 							{{ rankInfo.leaguePoints }} LP / {{ rankInfo.wins }}승
 							{{ rankInfo.losses }}패
 						</div>
@@ -16,9 +17,7 @@
 						<!-- <div>{{ rankInfo.leagueId }}</div> -->
 					</div>
 					<div v-else>
-						<v-list-item-title class="text-h5 mb-1">
-							UnRanked
-						</v-list-item-title>
+						<v-list-item-title> UnRanked </v-list-item-title>
 					</div>
 				</v-list-item-content>
 
@@ -63,8 +62,9 @@ export default {
 
 <style>
 .icon {
-	height: 150px;
-	width: 150px;
+	height: 130px;
+	width: 130px;
 	margin-bottom: 15px;
+	padding: 1px;
 }
 </style>

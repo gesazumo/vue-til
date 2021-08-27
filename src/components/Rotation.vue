@@ -1,7 +1,11 @@
 <template>
 	<v-container class="box">
 		<div class="titles">{{ title }}</div>
-		<v-row v-if="freeChampionIds.length > 0">
+		<template v-if="this.loading">
+			<circle-loading />
+		</template>
+
+		<v-row v-if="freeChampionIds.length > 0 && !this.loading">
 			<v-col v-for="i in freeChampionIds" :key="i" :cols="1" class="col">
 				<rotation-champ :champ-key="i" />
 			</v-col>
@@ -27,12 +31,13 @@ export default {
 		}
 	},
 	async created() {
-		try {
+		this.fetchData(this.fetchFunction)
+	},
+	methods: {
+		async fetchFunction() {
 			const { data } = await fetchRotationChampions()
 			this.freeChampionIds = data.freeChampionIds
-		} catch (error) {
-			console.log(error)
-		}
+		},
 	},
 }
 </script>
@@ -43,6 +48,10 @@ export default {
 	align-items: center;
 	flex-direction: row;
 	justify-content: center;
+}
+
+.box {
+	width: 100%;
 }
 
 .rotation-champion-box {
