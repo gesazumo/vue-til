@@ -181,10 +181,10 @@
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="plusSection">
 				<button @click="showDetail" class="plusButton">
-					<v-icon v-if="showDetailFlag"> mdi-minus </v-icon>
-					<v-icon v-else> mdi-plus </v-icon>
+					<v-icon v-if="showDetailFlag"> mdi-chevron-up </v-icon>
+					<v-icon v-else> mdi-chevron-down </v-icon>
 				</button>
 			</div>
 		</div>
@@ -398,10 +398,16 @@ export default {
 	height: 25px;
 	padding: 1px;
 }
+.plusSection {
+	position: relative;
+}
 .plusButton {
+	position: absolute;
 	background-color: snow;
 	border-radius: 100%;
 	width: 35px;
 	height: 35px;
+	top: 25px;
+	right: 5px;
 }
 </style>

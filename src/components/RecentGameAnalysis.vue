@@ -13,7 +13,8 @@
 		<div :style="{ width: '30vw', display: 'flex' }" v-if="recentGameSummary">
 			<div>
 				<span class="title"
-					>5전 {{ recentGameSummary.totalWin }}승
+					>{{ recentGameSummary.totalWin + recentGameSummary.totalLose }}전
+					{{ recentGameSummary.totalWin }}승
 					{{ recentGameSummary.totalLose }}패</span
 				>
 				<donut-chart
@@ -140,6 +141,9 @@ export default {
 	display: flex;
 	color: #666;
 	margin-bottom: 3px;
+	border: 1px solid;
+	border-color: gainsboro;
+	padding: 10px;
 }
 .recnetGameAnaly .title {
 	color: #666;
