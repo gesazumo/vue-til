@@ -50,6 +50,10 @@ export default {
 	justify-content: center;
 }
 
+.box {
+	width: 100%;
+}
+
 .rotation-champion-box {
 	padding: 20;
 }

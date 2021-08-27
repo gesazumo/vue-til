@@ -4,7 +4,7 @@
 			<blink-loading v-if="!rankInfo" />
 			<v-list-item three-line v-if="rankInfo" :style="{ height: '100%' }">
 				<v-list-item-content>
-					<div :style="{ fontSize: '0.8rem' }">{{ title }}</div>
+					<div :style="{ fontSize: '1rem' }">{{ title }}</div>
 					<div v-if="Object.keys(rankInfo).length > 0">
 						<v-list-item-title>
 							{{ rankInfo.tier }} {{ rankInfo.rank }}

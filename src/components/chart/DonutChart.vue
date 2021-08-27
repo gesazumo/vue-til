@@ -73,7 +73,7 @@ export default {
 
 <style>
 .donutChart {
-	width: 10vw;
-	height: 10vw;
+	width: 160px;
+	height: 160px;
 }
 </style>

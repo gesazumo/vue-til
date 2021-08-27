@@ -30,8 +30,8 @@ export default {
 	padding: 20;
 }
 .rotation-champion-box .portrait {
-	height: 85px;
-	width: 85px;
+	height: 80px;
+	width: 80px;
 }
 .rotation-champion-box .champion-name {
 	font-size: x-small;
