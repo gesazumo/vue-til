@@ -1,4 +1,5 @@
-import Loading from '@/components/common/Loading.vue'
+import CircleLoading from '@/components/common/CircleLoading.vue'
+import BlinkLoading from '@/components/common/BlinkLoading.vue'
 
 export default {
 	install(Vue) {
@@ -26,6 +27,7 @@ export default {
 				},
 			},
 		})
-		Vue.component('Loading', Loading)
+		Vue.component('CircleLoading', CircleLoading)
+		Vue.component('BlinkLoading', BlinkLoading)
 	},
 }

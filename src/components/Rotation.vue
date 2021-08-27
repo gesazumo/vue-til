@@ -2,7 +2,7 @@
 	<v-container class="box">
 		<div class="titles">{{ title }}</div>
 		<template v-if="this.loading">
-			<loading />
+			<circle-loading />
 		</template>
 
 		<v-row v-if="freeChampionIds.length > 0 && !this.loading">
