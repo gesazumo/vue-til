@@ -1,14 +1,38 @@
 <template>
 	<div>
-		aa
-		<v-text-field label="Regular" placeholder="Placeholder"></v-text-field>
-		bb
+		<v-text-field
+			placeholder="소환사명"
+			:rules="rules"
+			counter="5"
+			v-model="value"
+		></v-text-field>
+		<button @click="onClick">123</button>
+		<input type="text" v-model="value" @change="handleInput" />
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'PostNameForm',
+	data() {
+		return {
+			rules: [v => v.length <= 5 || '너무 길어요'],
+		}
+	},
+	props: {
+		value: {
+			type: String,
+			default: '',
+		},
+	},
+	methods: {
+		handleInput() {
+			this.$emit('input', this.value)
+		},
+		onClick() {
+			this.$emit('onClick', this.value)
+		},
+	},
 }
 </script>
 

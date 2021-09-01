@@ -8,7 +8,9 @@ export default {
 const Template = (args, { argTypes }) => ({
 	props: Object.keys(argTypes),
 	components: { PostNameForm },
-	template: '<post-name-form/>',
+	template:
+		'<post-name-form :value="value" @input="input" @onClick="onClick"/>',
+	data: { value: '부모가준거' },
 })
 
 export const Normal = Template.bind({})
