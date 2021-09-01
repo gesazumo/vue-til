@@ -6,11 +6,7 @@ addDecorator(() => ({
   vuetify,
   template: `
       <v-app>
-      <v-main>
-          <v-container fluid >
-          <story/>
-          </v-container>
-      </v-main>
+        <story/>
       </v-app>
       `,
   }));
