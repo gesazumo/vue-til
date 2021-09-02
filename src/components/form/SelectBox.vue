@@ -2,6 +2,8 @@
 	<v-select
 		:items="items"
 		label="선택하세요"
+		item-text="label"
+		item-value="value"
 		solo
 		@change="onSelect"
 		v-model="selectedItem"
@@ -13,7 +15,7 @@ export default {
 	name: 'SelectBox',
 	data() {
 		return {
-			selectedItem: null,
+			selectedItem: this.items[0],
 		}
 	},
 	props: {

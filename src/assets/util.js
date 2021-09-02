@@ -1,4 +1,11 @@
-import { staticImageAPI, staticURL, teamName } from '@/assets/constant'
+import {
+	AddFriendTimeList,
+	PositionTypeList,
+	QuereTypeList,
+	staticImageAPI,
+	staticURL,
+	teamName,
+} from '@/assets/constant'
 import {
 	CLOSE_POST_FORM_MODAL,
 	SHOW_CONFIRM_MODAL,
@@ -52,6 +59,18 @@ const util = {
 
 	$closePostFormModal() {
 		this.$store.commit(CLOSE_POST_FORM_MODAL)
+	},
+
+	$quereTypeList() {
+		return QuereTypeList
+	},
+
+	$positionTypeList() {
+		return PositionTypeList
+	},
+
+	$addFriendTimeList() {
+		return AddFriendTimeList
 	},
 }
 

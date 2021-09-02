@@ -3,11 +3,11 @@
 		<v-card>
 			<v-card-text :style="{ padding: '10px' }" class="postFormModal">
 				<div class="selectSection">
-					<select-box :items="items" class="selectBox" />
-					<select-box :items="items" class="selectBox" />
+					<select-box :items="$quereTypeList()" class="selectBox" />
+					<select-box :items="$positionTypeList()" class="selectBox" />
 				</div>
 				<div class="selectSection">
-					<select-box :items="items" class="selectBox" />
+					<select-box :items="$addFriendTimeList()" class="selectBox" />
 					<select-box :items="items" class="selectBox" />
 				</div>
 				<post-name-form />
