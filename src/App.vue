@@ -4,18 +4,18 @@
 			<search-bar />
 			<router-view></router-view>
 		</div>
-		<!-- <confirm-modal /> -->
+		<post-form-modal />
 	</v-app>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar.vue'
 import { mapActions } from 'vuex'
-// import ConfirmModal from './components/modal/ConfirmModal.vue'
+import PostFormModal from './components/modal/PostFormModal.vue'
 
 export default {
 	name: 'App',
-	components: { SearchBar },
+	components: { SearchBar, PostFormModal },
 	data() {
 		return {}
 	},

@@ -7,6 +7,8 @@ import {
 	SET_SPELL_LIST,
 	SET_ITEM_LIST,
 	SHOW_CONFIRM_MODAL,
+	SHOW_POST_FORM_MODAL,
+	CLOSE_POST_FORM_MODAL,
 } from './mutation-type'
 
 Vue.use(Vuex)
@@ -24,6 +26,7 @@ export default new Vuex.Store({
 		itemList: {},
 		loading: false,
 		showConfirmModal: false,
+		showPostFormModal: false,
 	},
 	getters: {
 		championInfo: state => key => {
@@ -59,6 +62,12 @@ export default new Vuex.Store({
 		},
 		[SHOW_CONFIRM_MODAL](state) {
 			state.showConfirmModal = true
+		},
+		[SHOW_POST_FORM_MODAL](state) {
+			state.showPostFormModal = true
+		},
+		[CLOSE_POST_FORM_MODAL](state) {
+			state.showPostFormModal = false
 		},
 	},
 

@@ -6,8 +6,6 @@
 			counter="5"
 			v-model="value"
 		></v-text-field>
-		<button @click="onClick">123</button>
-		<input type="text" v-model="value" @change="handleInput" />
 	</div>
 </template>
 

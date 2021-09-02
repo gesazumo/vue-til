@@ -1,5 +1,9 @@
 import { staticImageAPI, staticURL, teamName } from '@/assets/constant'
-import { SHOW_CONFIRM_MODAL } from '../store/mutation-type'
+import {
+	CLOSE_POST_FORM_MODAL,
+	SHOW_CONFIRM_MODAL,
+	SHOW_POST_FORM_MODAL,
+} from '../store/mutation-type'
 
 const util = {
 	$getSummonerIcon(key) {
@@ -40,6 +44,14 @@ const util = {
 		return new Promise(resolve => {
 			this.$store.commit(SHOW_CONFIRM_MODAL, resolve)
 		})
+	},
+
+	$showPostFormModal() {
+		this.$store.commit(SHOW_POST_FORM_MODAL)
+	},
+
+	$closePostFormModal() {
+		this.$store.commit(CLOSE_POST_FORM_MODAL)
 	},
 }
 

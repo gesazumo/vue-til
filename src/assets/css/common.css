@@ -15,6 +15,15 @@
 	background-color: dodgerblue;
 	color: floralwhite;
 	font-size: 1rem !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.addPostButton {
+    background: rgb(255, 109, 109);
+    padding: 0px 5px;
+    border-radius: 5px;
+    font-size: 0.9rem 
 }
 
 .section .container {
@@ -66,4 +75,16 @@
     color:rgb(163, 163, 163);
     background: rgb(0, 0, 0);
     font-size: 0.6rem;
+}
+
+.postFormModal {
+    background: rgb(246, 246, 246);
+}
+
+.selectSection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selectSection .selectBox {
 }
