@@ -13,6 +13,8 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import colorPlugin from './plugins/stylePlugin'
 import loadingPlugin from './plugins/loadingPlugin'
 
+import '@/assets/css/common.css'
+
 Vue.config.productionTip = false
 Object.keys(filters).forEach(key => {
 	Vue.filter(key, filters[key])

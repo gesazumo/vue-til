@@ -1,16 +1,18 @@
 <template>
-	<v-container class="box">
-		<div class="titles">{{ title }}</div>
-		<template v-if="this.loading">
-			<circle-loading />
-		</template>
+	<section class="section">
+		<div class="title">{{ title }}</div>
+		<div class="container">
+			<template v-if="this.loading">
+				<circle-loading />
+			</template>
 
-		<v-row v-if="freeChampionIds.length > 0 && !this.loading">
-			<v-col v-for="i in freeChampionIds" :key="i" :cols="1" class="col">
-				<rotation-champ :champ-key="i" />
-			</v-col>
-		</v-row>
-	</v-container>
+			<template v-if="freeChampionIds.length > 0 && !this.loading">
+				<div v-for="i in freeChampionIds" :key="i">
+					<rotation-champ :champ-key="i" />
+				</div>
+			</template>
+		</div>
+	</section>
 </template>
 
 <script>
@@ -41,24 +43,3 @@ export default {
 	},
 }
 </script>
-
-<style>
-.col {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.box {
-	width: 100%;
-}
-
-.rotation-champion-box {
-	padding: 20;
-}
-.rotation-champion-box .champion-name {
-	font-size: x-small;
-	text-align: center;
-}
-</style>
