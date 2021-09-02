@@ -1,5 +1,5 @@
 .browser {
-	padding: 10px 10%;
+	padding: 10px 135px;
 }
 
 .section {
@@ -21,4 +21,49 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+.post {
+    background: rgb(0, 0, 0);
+    width:380px;
+    height:230px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.post .time {
+    color:#ed9c28;
+
+}
+.post .title {
+    color:#fffbf5;
+    background: rgb(0, 0, 0);
+    font: bold;
+    margin-bottom: 20px;
+
+}
+
+.post .textRow {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.post .body {
+    color:#dddddd;
+    background: rgb(0, 0, 0);
+    height: 100px;
+}
+
+.post .summoner {
+    color:#fffbf5;
+    background: rgb(0, 0, 0);
+    font: bold;
+}
+
+.post .expire {
+    color:rgb(163, 163, 163);
+    background: rgb(0, 0, 0);
+    font-size: 0.6rem;
 }
