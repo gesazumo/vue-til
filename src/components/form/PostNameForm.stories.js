@@ -8,8 +8,7 @@ export default {
 const Template = (args, { argTypes }) => ({
 	props: Object.keys(argTypes),
 	components: { PostNameForm },
-	template:
-		'<post-name-form :value="value" @input="input" @onClick="onClick"/>',
+	template: '<post-name-form :value="value" @input="input"/>',
 	data: { value: '부모가준거' },
 })
 

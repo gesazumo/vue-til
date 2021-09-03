@@ -1,10 +1,11 @@
 import {
 	AddFriendTimeList,
 	PositionTypeList,
-	QuereTypeList,
+	QueueTypeList,
 	staticImageAPI,
 	staticURL,
 	teamName,
+	VoiceOn,
 } from '@/assets/constant'
 import {
 	CLOSE_POST_FORM_MODAL,
@@ -54,15 +55,17 @@ const util = {
 	},
 
 	$showPostFormModal() {
-		this.$store.commit(SHOW_POST_FORM_MODAL)
+		return new Promise(resolve => {
+			this.$store.commit(SHOW_POST_FORM_MODAL, { resolve })
+		})
 	},
 
-	$closePostFormModal() {
-		this.$store.commit(CLOSE_POST_FORM_MODAL)
+	$closePostFormModal(flag) {
+		this.$store.commit(CLOSE_POST_FORM_MODAL, { flag })
 	},
 
-	$quereTypeList() {
-		return QuereTypeList
+	$queueTypeList() {
+		return QueueTypeList
 	},
 
 	$positionTypeList() {
@@ -71,6 +74,10 @@ const util = {
 
 	$addFriendTimeList() {
 		return AddFriendTimeList
+	},
+
+	$voiceOn() {
+		return VoiceOn
 	},
 }
 

@@ -38,8 +38,8 @@ export const staticURL = {
 	item: 'item/',
 }
 
-export const QuereTypeList = [
-	{ value: 'normal', label: '일반' },
+export const QueueTypeList = [
+	{ value: 'normal', label: '일반게임' },
 	{ value: 'soloRank', label: '솔로랭크' },
 	{ value: 'freeRank', label: '자유랭크' },
 	{ value: 'aram', label: '칼바람나락' },
@@ -55,10 +55,15 @@ export const PositionTypeList = [
 ]
 
 export const AddFriendTimeList = [
-	{ value: '6h', label: '6시간 내 친구신청 가능' },
-	{ value: '3h', label: '3시간 내 친구신청 가능' },
-	{ value: '2h', label: '2시간 내 친구신청 가능' },
-	{ value: '1h', label: '1시간 내 친구신청 가능' },
-	{ value: '30m', label: '30분 내 친구신청 가능' },
 	{ value: '15m', label: '15분 내 친구신청 가능' },
+	{ value: '30m', label: '30분 내 친구신청 가능' },
+	{ value: '1h', label: '1시간 내 친구신청 가능' },
+	{ value: '2h', label: '2시간 내 친구신청 가능' },
+	{ value: '3h', label: '3시간 내 친구신청 가능' },
+	{ value: '6h', label: '6시간 내 친구신청 가능' },
+]
+
+export const VoiceOn = [
+	{ value: true, label: '마이크 가능' },
+	{ value: false, label: '마이크 불가능' },
 ]

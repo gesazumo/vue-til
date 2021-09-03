@@ -16,8 +16,11 @@ export default {
 	components: { Post },
 	name: 'Posts',
 	methods: {
-		showModal() {
-			this.$showPostFormModal()
+		async showModal() {
+			const result = await this.$showPostFormModal()
+			if (result) {
+				console.log('리스트재조회 하자')
+			}
 		},
 	},
 }

@@ -5,25 +5,23 @@
 		item-text="label"
 		item-value="value"
 		solo
-		@change="onSelect"
-		v-model="selectedItem"
+		@input="onSelect"
+		:value="value"
+		return-object
 	></v-select>
 </template>
 
 <script>
 export default {
 	name: 'SelectBox',
-	data() {
-		return {
-			selectedItem: this.items[0],
-		}
-	},
 	props: {
+		value: Object,
 		items: [],
 	},
 	methods: {
-		onSelect() {
-			this.$emit('onSelect', this.selectedItem)
+		onSelect(value) {
+			console.log(value)
+			this.$emit('input', value)
 		},
 	},
 }

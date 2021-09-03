@@ -2,9 +2,10 @@
 	<div>
 		<v-text-field
 			placeholder="소환사명"
-			:rules="rules"
-			counter="5"
-			v-model="value"
+			:rules="[validation1, validation2]"
+			:counter="counter"
+			:value="value"
+			@input="handleInput"
 		></v-text-field>
 	</div>
 </template>
@@ -14,7 +15,7 @@ export default {
 	name: 'PostNameForm',
 	data() {
 		return {
-			rules: [v => v.length <= 5 || '너무 길어요'],
+			counter: 10,
 		}
 	},
 	props: {
@@ -23,12 +24,17 @@ export default {
 			default: '',
 		},
 	},
-	methods: {
-		handleInput() {
-			this.$emit('input', this.value)
+	computed: {
+		validation1() {
+			return this.value.length <= this.counter || '너무길어요.'
 		},
-		onClick() {
-			this.$emit('onClick', this.value)
+		validation2() {
+			return Boolean(this.value) || '필수입력값입니다.'
+		},
+	},
+	methods: {
+		handleInput(value) {
+			this.$emit('input', value)
 		},
 	},
 }

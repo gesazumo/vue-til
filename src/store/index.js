@@ -27,6 +27,7 @@ export default new Vuex.Store({
 		loading: false,
 		showConfirmModal: false,
 		showPostFormModal: false,
+		showPostFormModalResolve: null,
 	},
 	getters: {
 		championInfo: state => key => {
@@ -63,11 +64,14 @@ export default new Vuex.Store({
 		[SHOW_CONFIRM_MODAL](state) {
 			state.showConfirmModal = true
 		},
-		[SHOW_POST_FORM_MODAL](state) {
+		[SHOW_POST_FORM_MODAL](state, { resolve }) {
 			state.showPostFormModal = true
+			state.showPostFormModalResolve = resolve
 		},
-		[CLOSE_POST_FORM_MODAL](state) {
+		[CLOSE_POST_FORM_MODAL](state, { flag }) {
 			state.showPostFormModal = false
+			state.showPostFormModalResolve && state.showPostFormModalResolve(flag)
+			state.showPostFormModalResolve = null
 		},
 	},
 

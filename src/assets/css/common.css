@@ -87,4 +87,11 @@
 }
 
 .selectSection .selectBox {
+    width: 100px;
+}
+
+.modalTitle {
+    background: coral;
+    border: 1px rgb(255, 72, 0) solid;
+    text-align: center;
 }
