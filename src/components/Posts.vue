@@ -9,6 +9,14 @@
 				<post :postData="postData" />
 			</div>
 		</div>
+		{{ localLoading }}
+		<div class="text-center" v-if="postList.length > 0">
+			<v-pagination
+				v-model="page"
+				:length="totalLength"
+				@input="movePage"
+			></v-pagination>
+		</div>
 	</section>
 </template>
 
@@ -20,27 +28,32 @@ export default {
 	name: 'Posts',
 	data() {
 		return {
+			page: 1,
 			postList: [],
-			from: 0,
-			to: 10,
+			postPerPage: 12,
+			totalLength: 5,
 		}
 	},
 	created() {
-		this.getPostList()
+		this.fetchData(() => this.getPostList({ page: 1 }))
 	},
 	methods: {
-		async getPostList() {
+		async getPostList({ page }) {
 			const filterObject = {
-				from: 0,
-				to: 10,
+				from: (page - 1) * 12,
+				to: page * 12,
 			}
 			const { data } = await fetchGetPostList(filterObject)
-			this.postList.push(...data)
+			this.postList = data
+		},
+		movePage(page) {
+			this.fetchData(() => this.getPostList({ page }))
 		},
 		async showModal() {
 			const result = await this.$showPostFormModal()
 			if (result) {
-				this.getPostList
+				this.page = 1
+				this.fetchData(() => this.getPostList({ page: 1 }))
 			}
 		},
 	},
