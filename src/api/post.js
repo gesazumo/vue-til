@@ -8,7 +8,23 @@ export const fetchCreatePost = postObject => {
 	return instance.post(url.post, postObject)
 }
 
-export const fetchGetPostList = filterObject => {
+export const getFilter = filter => {
+	for (const key in filter) {
+		if (typeof filter[key] == 'object') {
+			filter[key] = filter[key].value
+		}
+		console.log(filter[key] == 'none')
+		!(filter[key] == 'none') ?? delete filter[key]
+	}
+
+	return filter
+}
+
+export const fetchGetPostList = filter => {
+	const filterObject = {
+		...filter,
+	}
+	console.log(getFilter({ ...filter }))
 	return instance.get(url.post, {
 		params: { ...filterObject },
 	})

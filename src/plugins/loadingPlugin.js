@@ -14,7 +14,6 @@ export default {
 					this.localLoading = flag
 				},
 				async fetchData(fetchFunction) {
-					console.log(fetchFunction)
 					try {
 						this.setLoading(true)
 						await fetchFunction()

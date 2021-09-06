@@ -33,6 +33,7 @@
 						<select-box :items="$voiceOn()" class="selectBox" v-model="voice" />
 					</div>
 					<post-name-form v-model="summonerName" />
+					<post-title-form v-model="title" />
 					<post-body-form v-model="body" />
 				</v-card-text>
 
@@ -53,13 +54,15 @@ import PostBodyForm from '../form/PostBodyForm.vue'
 import PostNameForm from '../form/PostNameForm.vue'
 import SelectBox from '../form/SelectBox.vue'
 import { fetchCreatePost } from '@/api/post'
+import PostTitleForm from '../form/PostTitleForm.vue'
 
 export default {
-	components: { SelectBox, PostBodyForm, PostNameForm },
+	components: { SelectBox, PostBodyForm, PostNameForm, PostTitleForm },
 	name: 'PostFormModal',
 	data() {
 		return {
 			summonerName: '',
+			title: '',
 			body: '',
 			queueType: this.$queueTypeList()[0],
 			positionType: this.$positionTypeList()[0],
@@ -71,21 +74,25 @@ export default {
 		...mapState(['showPostFormModal']),
 	},
 	methods: {
-		async clickOut() {
-			this.$closePostFormModal(false)
+		initForm() {
 			this.$refs.form.resetValidation()
 			this.summonerName = ''
 			this.body = ''
+			this.title = ''
 			this.queueType = this.$queueTypeList()[0]
 			this.positionType = this.$positionTypeList()[0]
 			this.addFriendTime = this.$addFriendTimeList()[0]
 			this.voice = this.$voiceOn()[0]
 		},
+		async clickOut() {
+			this.$closePostFormModal(false)
+			this.initForm()
+		},
 		async onSubmit() {
 			const validate = this.$refs.form.validate()
 			if (validate) {
 				const postObject = {
-					title: '타이틀',
+					title: this.title,
 					name: this.summonerName,
 					body: this.body,
 					queueType: this.queueType.value,
@@ -94,6 +101,7 @@ export default {
 				}
 				try {
 					await fetchCreatePost(postObject)
+					this.initForm()
 					this.$closePostFormModal(true)
 				} catch (err) {
 					console.log(err)
