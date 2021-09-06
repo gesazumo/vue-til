@@ -15,7 +15,7 @@
 		</div> -->
 		<recent-game-analysis />
 		<circle-loading
-			v-if="loading"
+			v-if="localLoading"
 			:style="{
 				height: '25vh',
 				display: 'flex',

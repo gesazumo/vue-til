@@ -6,22 +6,20 @@ export default {
 		Vue.mixin({
 			data() {
 				return {
-					loading: false,
+					localLoading: false,
 				}
 			},
 			methods: {
 				setLoading(flag) {
-					this.loading = flag
+					this.localLoading = flag
 				},
 				async fetchData(fetchFunction) {
 					try {
 						this.setLoading(true)
-						console.log(this.loading)
 						await fetchFunction()
 					} catch (error) {
 						console.log(error)
 					} finally {
-						console.log('flase로 바뀐다')
 						this.setLoading(false)
 					}
 				},
