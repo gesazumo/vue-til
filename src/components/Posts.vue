@@ -21,17 +21,29 @@
 				}"
 			/>
 		</template>
+
 		<template v-else>
-			<div class="container" v-if="postList.length > 0">
+			<div class="container" v-if="!this.noContent">
 				<div v-for="postData in postList" :key="postData.id">
 					<post :postData="postData" />
 				</div>
 			</div>
+			<div v-else>
+				<no-content
+					:style="{
+						height: '50vh',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}"
+				/>
+			</div>
 		</template>
-		<div class="text-center" v-if="postList.length > 0">
+		<div class="text-center" v-if="!this.noContent">
 			<v-pagination
 				v-model="filter.page"
-				:length="totalLength"
+				:length="totalCount"
 				@input="movePage"
 			></v-pagination>
 		</div>
@@ -48,8 +60,7 @@ export default {
 	data() {
 		return {
 			postList: [],
-			postPerPage: 12,
-			totalLength: 5,
+			totalCount: 5,
 			filter: {
 				page: 1,
 				queueType: this.$queueTypeList()[0],
@@ -67,6 +78,11 @@ export default {
 	created() {
 		this.fetchData(() => this.getPostList(this.filter))
 	},
+	computed: {
+		noContent() {
+			return this.postList.length == 0
+		},
+	},
 	methods: {
 		initFilter() {
 			this.filter = {
@@ -75,8 +91,14 @@ export default {
 			}
 		},
 		async getPostList(filter) {
-			const { data } = await fetchGetPostList(filter)
-			this.postList = data
+			const { data, status } = await fetchGetPostList(filter)
+			if (status == 204) {
+				this.postList = []
+				this.totalCount = 0
+				return
+			}
+			this.postList = data.posts
+			this.totalCount = data.totalCount / 12 + 1
 		},
 		movePage(page) {
 			this.filter.page = page

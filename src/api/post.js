@@ -13,19 +13,16 @@ export const getFilter = filter => {
 		if (typeof filter[key] == 'object') {
 			filter[key] = filter[key].value
 		}
-		console.log(filter[key] == 'none')
-		!(filter[key] == 'none') ?? delete filter[key]
+
+		filter[key] == 'none' && delete filter[key]
 	}
 
 	return filter
 }
 
 export const fetchGetPostList = filter => {
-	const filterObject = {
-		...filter,
-	}
-	console.log(getFilter({ ...filter }))
+	const filterObject = getFilter({ ...filter })
 	return instance.get(url.post, {
-		params: { ...filterObject },
+		params: filterObject,
 	})
 }

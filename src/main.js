@@ -12,6 +12,7 @@ import chartPlugin from '@/plugins/chartPlugin'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import colorPlugin from './plugins/stylePlugin'
 import loadingPlugin from './plugins/loadingPlugin'
+import NoContent from '@/components/NoContent'
 
 import '@/assets/css/common.css'
 
@@ -21,6 +22,8 @@ Object.keys(filters).forEach(key => {
 })
 
 Object.keys(util).forEach(key => (Vue.prototype[key] = util[key]))
+
+Vue.component('NoContent', NoContent)
 
 Vue.use(urlPlugin)
 Vue.use(modalPlugin)
