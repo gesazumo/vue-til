@@ -15,7 +15,7 @@
 		</div> -->
 		<recent-game-analysis />
 		<circle-loading
-			v-if="loading"
+			v-if="localLoading"
 			:style="{
 				height: '25vh',
 				display: 'flex',
@@ -41,10 +41,9 @@ import InfiniteLoading from 'vue-infinite-loading'
 import { fetchFindRecentGame } from '../api/find'
 import Game from './Game.vue'
 import RecentGameAnalysis from './RecentGameAnalysis.vue'
-import CircleLoading from './common/CircleLoading.vue'
 
 export default {
-	components: { Game, InfiniteLoading, RecentGameAnalysis, CircleLoading },
+	components: { Game, InfiniteLoading, RecentGameAnalysis },
 	data() {
 		return {
 			beginIndex: 0,

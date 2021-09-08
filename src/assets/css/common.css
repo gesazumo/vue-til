@@ -95,3 +95,32 @@
     border: 1px rgb(255, 72, 0) solid;
     text-align: center;
 }
+
+.filterBox {
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.filterBox .selectBox {
+    width: 100px;
+}
+
+.v-text-field.v-text-field--solo .v-input__control {
+    min-height: 36px;
+    padding: 0;
+}
+
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+    padding-top: 0px;
+    margin-bottom: 0px;
+}
+
+@media screen and (min-width: 1800px) {
+    .section .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-around;
+    }
+}

@@ -39,6 +39,7 @@ export const staticURL = {
 }
 
 export const QueueTypeList = [
+	{ value: 'none', label: '모든게임' },
 	{ value: 'normal', label: '일반게임' },
 	{ value: 'soloRank', label: '솔로랭크' },
 	{ value: 'freeRank', label: '자유랭크' },
@@ -55,6 +56,7 @@ export const PositionTypeList = [
 ]
 
 export const AddFriendTimeList = [
+	{ value: 'none', label: '전체보기' },
 	{ value: '15m', label: '15분 내 친구신청 가능' },
 	{ value: '30m', label: '30분 내 친구신청 가능' },
 	{ value: '1h', label: '1시간 내 친구신청 가능' },

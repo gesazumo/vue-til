@@ -2,11 +2,11 @@
 	<section class="section">
 		<div class="title">{{ title }}</div>
 		<div class="container">
-			<template v-if="this.loading">
+			<template v-if="localLoading">
 				<circle-loading />
 			</template>
 
-			<template v-if="freeChampionIds.length > 0 && !this.loading">
+			<template v-if="freeChampionIds.length > 0 && !localLoading">
 				<div v-for="i in freeChampionIds" :key="i">
 					<rotation-champ :champ-key="i" />
 				</div>

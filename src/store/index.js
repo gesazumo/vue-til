@@ -24,7 +24,7 @@ export default new Vuex.Store({
 		championList: {},
 		spellList: {},
 		itemList: {},
-		loading: false,
+		globalLoading: false,
 		showConfirmModal: false,
 		showPostFormModal: false,
 		showPostFormModalResolve: null,
@@ -56,7 +56,7 @@ export default new Vuex.Store({
 			state.spellList = spellList
 		},
 		[SET_LOADING](state, { flag }) {
-			state.loading = flag
+			state.globalLoading = flag
 		},
 		[SET_ITEM_LIST](state, { itemList }) {
 			state.itemList = itemList
