@@ -1,8 +1,18 @@
 <template>
 	<v-container>
 		<v-row>
-			<v-col cols="12" md="10">
+			<v-col cols="12" md="1">
+				<a>
+					<img
+						:src="require('@/assets/mylogo/good.jpg')"
+						class="homeLogo"
+						@click="goHome"
+					/>
+				</a>
+			</v-col>
+			<v-col cols="12" md="9">
 				<v-text-field
+					:style="{ marginTop: '20px' }"
 					@keyup.enter="doSearch"
 					v-model="summonerName"
 					label="소환사명을 입력하세요"
@@ -12,6 +22,7 @@
 
 			<v-col cols="12" md="2">
 				<v-btn
+					:style="{ marginTop: '20px' }"
 					class="searchButton"
 					depressed
 					color="primary"
@@ -47,6 +58,10 @@ export default {
 				return this.$router.go(this.$router.currentRoute)
 			const summonerName = this.summonerName
 			this.$router.push({ path: `/find/${summonerName}` })
+		},
+		goHome() {
+			this.summonerName = ''
+			this.$router.push('/home')
 		},
 	},
 }

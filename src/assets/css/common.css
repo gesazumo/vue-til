@@ -2,6 +2,11 @@
 	padding: 10px 135px;
 }
 
+.homeLogo {
+    width: 80px;
+    height: 100px;
+}
+
 .section {
 	outline: solid;
 	outline-color: dodgerblue;
