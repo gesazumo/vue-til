@@ -14,7 +14,7 @@
 				<v-card-text :style="{ padding: '10px' }" class="postFormModal">
 					<div class="selectSection">
 						<select-box
-							:items="$queueTypeList()"
+							:items="$queueTypeSelectList()"
 							class="selectBox"
 							v-model="queueType"
 						/>
@@ -26,7 +26,7 @@
 					</div>
 					<div class="selectSection">
 						<select-box
-							:items="$addFriendTimeList()"
+							:items="$addFriendTimeSelectList()"
 							class="selectBox"
 							v-model="addFriendTime"
 						/>
@@ -64,9 +64,9 @@ export default {
 			summonerName: '',
 			title: '',
 			body: '',
-			queueType: this.$queueTypeList()[0],
+			queueType: this.$queueTypeSelectList()[0],
 			positionType: this.$positionTypeList()[0],
-			addFriendTime: this.$addFriendTimeList()[0],
+			addFriendTime: this.$addFriendTimeSelectList()[0],
 			voice: this.$voiceOn()[0],
 		}
 	},
@@ -79,9 +79,9 @@ export default {
 			this.summonerName = ''
 			this.body = ''
 			this.title = ''
-			this.queueType = this.$queueTypeList()[0]
+			this.queueType = this.$queueTypeSelectList()[0]
 			this.positionType = this.$positionTypeList()[0]
-			this.addFriendTime = this.$addFriendTimeList()[0]
+			this.addFriendTime = this.$addFriendTimeSelectList()[0]
 			this.voice = this.$voiceOn()[0]
 		},
 		async clickOut() {
@@ -96,7 +96,8 @@ export default {
 					name: this.summonerName,
 					body: this.body,
 					queueType: this.queueType.value,
-					recruitPosition: this.positionType.value,
+					positionType: this.positionType.value,
+					addFriendTime: this.addFriendTime.value,
 					voice: this.voice.value,
 				}
 				try {

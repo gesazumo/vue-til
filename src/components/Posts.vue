@@ -4,12 +4,28 @@
 			<div>- 듀오구하기</div>
 			<button class="addPostButton" @click="showModal">작성하기</button>
 		</div>
-		<div>
+		<div class="filterBox">
 			<select-box
-				:items="$queueTypeList()"
 				class="selectBox"
+				:items="$queueTypeList()"
 				v-model="filter.queueType"
 			/>
+			<select-box
+				class="selectBox"
+				:items="$positionTypeList()"
+				v-model="filter.positionType"
+			/>
+			<select-box
+				class="selectBox"
+				:items="$addFriendTimeList()"
+				v-model="filter.addFriendTime"
+			/>
+			<select-box
+				class="selectBox"
+				:items="$voiceOn()"
+				v-model="filter.voice"
+			/>
+			<v-btn color="primary" @click="initFilter">전체보기</v-btn>
 		</div>
 		<template v-if="localLoading">
 			<circle-loading
@@ -64,6 +80,9 @@ export default {
 			filter: {
 				page: 1,
 				queueType: this.$queueTypeList()[0],
+				positionType: this.$positionTypeList()[0],
+				addFriendTime: this.$addFriendTimeList()[0],
+				voice: this.$voiceOn()[0],
 			},
 		}
 	},
@@ -88,6 +107,9 @@ export default {
 			this.filter = {
 				page: 1,
 				queueType: this.$queueTypeList()[0],
+				positionType: this.$positionTypeList()[0],
+				addFriendTime: this.$addFriendTimeList()[0],
+				voice: this.$voiceOn()[0],
 			}
 		},
 		async getPostList(filter) {

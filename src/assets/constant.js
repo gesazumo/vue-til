@@ -39,7 +39,7 @@ export const staticURL = {
 }
 
 export const QueueTypeList = [
-	{ value: 'none', label: '전체보기' },
+	{ value: 'none', label: '모든게임' },
 	{ value: 'normal', label: '일반게임' },
 	{ value: 'soloRank', label: '솔로랭크' },
 	{ value: 'freeRank', label: '자유랭크' },

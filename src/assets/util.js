@@ -68,12 +68,24 @@ const util = {
 		return QueueTypeList
 	},
 
+	$queueTypeSelectList() {
+		return QueueTypeList.slice(1)
+	},
+
 	$positionTypeList() {
 		return PositionTypeList
 	},
 
+	$positionTypeSelectList() {
+		return PositionTypeList.slice(1)
+	},
+
 	$addFriendTimeList() {
 		return AddFriendTimeList
+	},
+
+	$addFriendTimeSelectList() {
+		return AddFriendTimeList.slice(1)
 	},
 
 	$voiceOn() {

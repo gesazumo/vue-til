@@ -95,3 +95,13 @@
     border: 1px rgb(255, 72, 0) solid;
     text-align: center;
 }
+
+.filterBox {
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.filterBox .selectBox {
+    width: 100px;
+}
